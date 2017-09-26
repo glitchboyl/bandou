@@ -10,8 +10,10 @@ var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
 var request = require('request')
+var rp = require('request-promise')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
+var jsonp = require('jsonp')
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
@@ -99,11 +101,15 @@ interface.get('/movie_annual2016/widget', function (req, res) {
 })
 interface.get('/resources', function (req, res) {
   var resources = req.query.request || null;
-  if (resources)
-    request(`${resources}`, function (err, response, body) {
-      console.log(response)
-      res.end(body);
-    })
+  if (resources.substr(0, 4) != 'http') resources = `http:${resources}`
+  var options = {
+    url: resources,
+    encoding: null
+  };
+  res.setHeader('Content-Type', 'video/mp4');
+  rp(options).then(function (repos) {
+    res.send(repos);
+  });
 })
 
 var server = app.listen(port)

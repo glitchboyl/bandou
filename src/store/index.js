@@ -8,26 +8,31 @@ Vue.use(Vuex);
 
 const state = {
   movie: {
+    pv: 0,
     payload: null,
     widget_infos: [],
     subjects: []
   },
   game: {
+    pv: 0,
     payload: null,
     widget_infos: [],
     subjects: []
   },
   book: {
+    pv: 0,
     payload: null,
     widget_infos: [],
     subjects: []
   },
   drama: {
+    pv: 0,
     payload: null,
     widget_infos: [],
     subjects: []
   },
   music: {
+    pv: 0,
     payload: null,
     widget_infos: [],
     subjects: []

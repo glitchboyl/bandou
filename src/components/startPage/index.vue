@@ -4,7 +4,7 @@
       <div class="content-container">
         <div class="content">
           <div class="video-background">
-            <video loop="" autoplay=""><source :src="todo.video" type="video/mp4"></video>
+            <video loop="" autoplay=""><source :src="video" type="video/mp4"></video>
           </div>
           <h1 style="margin-top: -10px;"><img :src="todo.title_img"></h1>
           <div class="desc-container">

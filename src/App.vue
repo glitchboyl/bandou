@@ -2,7 +2,7 @@
   <div id="app">
     <div data-reactroot>
       <div class="app-container">
-        <fixed-header></fixed-header>
+        <fixed-header v-if="widgetInfosLength > 0"></fixed-header>
         <router-view v-if="widgetInfosLength > 0"></router-view>
       </div>
     </div>

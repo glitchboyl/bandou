@@ -18,10 +18,12 @@ export default {
   }) {
     Axios.get('/movie_annual2016').then(function (res) {
       let {
+        pv,
         payload,
         widget_infos
       } = res.data.res;
       commit('set-movie-annual-2016', {
+        pv,
         payload,
         widget_infos
       });
@@ -53,10 +55,12 @@ export default {
   }) {
     Axios.get('/game_annual2016').then(function (res) {
       let {
+        pv,
         payload,
         widget_infos
       } = res.data.res;
       commit('set-game-annual-2016', {
+        pv,
         payload,
         widget_infos
       });
@@ -67,10 +71,12 @@ export default {
   }) {
     Axios.get('/book_annual2016').then(function (res) {
       let {
+        pv,
         payload,
         widget_infos
       } = res.data.res;
       commit('set-book-annual-2016', {
+        pv,
         payload,
         widget_infos
       });
@@ -81,10 +87,12 @@ export default {
   }) {
     Axios.get('/drama_annual2016').then(function (res) {
       let {
+        pv,
         payload,
         widget_infos
       } = res.data.res;
       commit('set-drama-annual-2016', {
+        pv,
         payload,
         widget_infos
       });
@@ -95,10 +103,12 @@ export default {
   }) {
     Axios.get('/music_annual2016').then(function (res) {
       let {
+        pv,
         payload,
         widget_infos
       } = res.data.res;
       commit('set-music-annual-2016', {
+        pv,
         payload,
         widget_infos
       });

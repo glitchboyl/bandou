@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "jsonp": "^0.2.1",
     "request": "^2.81.0",
+    "request-promise": "^4.2.2",
     "vue": "^2.4.2",
+    "vue-click-outside": "^1.0.6",
     "vue-router": "^2.7.0",
     "vuex": "^2.4.0"
   },
