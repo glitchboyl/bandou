@@ -1,14 +1,14 @@
 ﻿<template>
-  <section class="section start-page">
+  <section class="section">
     <div class="section-container">
       <div class="content-container">
         <div class="content">
           <div class="video-background">
             <video loop="" autoplay=""><source :src="video" type="video/mp4"></video>
           </div>
-          <h1 style="margin-top: -10px;"><img :src="todo.title_img"></h1>
+          <h1 style="margin-top: -10px;"><img :src="payload.title_img"></h1>
           <div class="desc-container">
-            <div>{{ todo.description }}</div>
+            <div>{{ payload.description }}</div>
           </div>
         </div>
       </div>
@@ -18,11 +18,11 @@
 
 <script>
   export default {
-    props: ['todo'],
+    props: ['payload'],
     data() {
       let self = this;
       return {
-        video: `/resources?request=${self.todo.video}`
+        video: `/resources?request=${self.payload.video}`
       }
     }
   }

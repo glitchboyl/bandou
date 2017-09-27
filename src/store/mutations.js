@@ -23,11 +23,9 @@ export default {
   },
   [setMovieWidgetInfos](state, {
     nth,
-    subject,
-    callback
+    subject
   }) {
     state.movie.subjects[nth] = subject;
-    if (callback && typeof (callback) == 'function') callback();
   },
   [setGameAnnual2016](state, {
     pv,

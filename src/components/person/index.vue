@@ -1,5 +1,5 @@
 ﻿<template>
-  <section class="section person">
+  <section class="section">
     
   </section>
 </template>

@@ -37,7 +37,8 @@ export default {
         id,
         kind_str,
         payload,
-        subjects
+        subjects,
+        user
       } = res.data.res;
       commit('set-movie-widget-infos', {
         nth,
@@ -45,7 +46,8 @@ export default {
           id,
           kind_str,
           payload,
-          subjects
+          subjects,
+          user
         }
       });
     })

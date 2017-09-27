@@ -1,6 +1,7 @@
 ﻿<template>
-  <div class="main-container">
-    <component v-for="section in subjects" :todo="section.payload" :is="section.kind_str" :key="section.id"></component>
+  <div class="main-container" :style="{transform: `translate3d(0px, ${-100 * $route.params.nth}%, 0px)`}">
+    <component v-for="(section,index) in subjects" v-if="section" :payload="section.payload" :subjects="section.subjects" :user="section.user" :is="section.kind_str" :key="section.id"></component>
+    <section class="section" v-else></section>
   </div>
 </template>
 
@@ -11,6 +12,7 @@
   import the_fallen from '@/components/theFallen';
   import person from '@/components/person';
   import end_page from '@/components/navigation';
+  import unknown from '@/components/unknown';
   export default {
     name: 'main',
     computed: {
@@ -24,7 +26,8 @@
       dialogue,
       the_fallen,
       person,
-      end_page
+      end_page,
+      unknown
     }
   }
 </script>

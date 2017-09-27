@@ -1,5 +1,5 @@
 ﻿<template>
-  <section class="section the-fallen">
+  <section class="section">
     
   </section>
 </template>

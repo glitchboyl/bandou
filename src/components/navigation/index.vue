@@ -1,5 +1,5 @@
 ﻿<template>
-  <section class="section navigation">
+  <section class="section">
     
   </section>
 </template>

@@ -25,7 +25,7 @@
       <div class="background-music" v-if="background_musics" @mouseover="showName(false)" @mouseout="showName(true)" @click="toggleMusic">
         <img class="icon-music" :src="icon_music">
         <span class="music-title">{{ isPlaying ? (isShowed ? background_musics.name : '关闭背景音乐') : '播放背景音乐'}}</span>
-        <audio :src="background_musics.url" autoplay style="display: none;" ref="audio"></audio>
+        <audio :src="background_musics.url" autoplay loop style="display: none;" ref="audio"></audio>
       </div>
       <aside class="doulist" v-click-outside="close">
         <button :class="{isOpened}" @click="toggleList"><div class="icon-doulist">目录</div></button>
