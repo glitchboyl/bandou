@@ -30,5 +30,8 @@
 </script>
 
 <style scoped>
-
+  .main-container {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+  }
 </style>

@@ -22,16 +22,13 @@
       <span class="page-view">共 {{ pv }} 人访问</span>
     </div>
     <div class="right-part">
-      <div class="background-music">
-        <img class="icon-music" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAYCAYAAADpnJ2CAAAABGdBTUEAALGPC/xhBQAAAF1JREFUSA3tlcEKACAIQzX8/1+ujrLLEMXTPDWyiU8kt2LcH/mJ/8ianQ9LmL5XwWmiJqTjSGPcEQxxbzVDANSXQtpnCA7rSAP3pPq/QQNUrneognQm1QQhrRKj+Q9prwww1XTWTQAAAABJRU5ErkJggg==">
-        <span class="music-title">播放背景音乐</span>
-        <audio src="https://mr3.doubanio.com/b1dce1982d6f0560234458b32c4c4df3/0/fm/song/p2694025_64k.mp4" style="display: none;"></audio>
+      <div class="background-music" v-if="background_musics" @mouseover="showName(false)" @mouseout="showName(true)" @click="toggleMusic">
+        <img class="icon-music" :src="icon_music">
+        <span class="music-title">{{ isPlaying ? (isShowed ? background_musics.name : '关闭背景音乐') : '播放背景音乐'}}</span>
+        <audio :src="background_musics.url" autoplay style="display: none;" ref="audio"></audio>
       </div>
-      <!-- <img class="_1BCLFoqLEoGREitI_91epj" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAAftJREFUSA29ljFOwzAUhglzuQBMFVL3VqyoCwdg6NR7VGLtxF06VFyALgzdYG0PUCYEEt2QUPj+1m5cYydOiHjSX9vP/3t/7SR+zk4SLM/zPrRbcA0uwDmQvYINeAIPWZa90DY3hEZgBVJN3FFtRYK6YJmqEuAptpskDHEI3sBfTTmGpaIigC/gm3wzMAY90DFQXz7NxeLCogRoG0Mrm+O/LP2nTIoDQs9bOX9vL07/mX3jm1QJ2Xm49yBmS8vbtbD0NvrWlpjNW7y9ePytmB/9o5IBsaGVveN/tEqmXdnV9b0JPfzKZ6ZgeDGxgXIA/0XqK2gKXJuVLOgwRUBUzJLg6O11bSrBheuhP7YBsRZOpZhilcvLvZBz7Tl7MSGTJEnMcPWduraW4Nb10O/EBJlLFjOCOiBc2yYLElVLzAieuWr0P5O2tIlYbEtPmVA9c+3KHUiM8Z3ro/8Bbqh/z57fHx7lYnIjQRVP11Rod/ZHMeU45NpnRIukwQ+/6TaaxMob/vBFYNI/2vwxlFzH1cAmrGrhqsq4tj/ajGDo8HbJdcUmbrDpF4e3EV0GSHI1EVNpc+24PBnBWAHWqV95mIsD/G2UaLgAG9EhBP+EV5B87V4xJCgj8RCErhq4a5lyhO8ze6niF+L/XRML2d1qW78IZ65ArM+KW7vq/wAYdECWtmmIzAAAAABJRU5ErkJggg==">
-                <span class="_3180YiT2ZCj0CZgpVV9oAQ">关闭背景音乐</span>
-                <audio src="https://mr3.doubanio.com/b1dce1982d6f0560234458b32c4c4df3/0/fm/song/p2694025_64k.mp4" style="display: none;"></audio> -->
       <aside class="doulist" v-click-outside="close">
-        <button :class="{isOpened}" @click="toggle"><div class="icon-doulist">目录</div></button>
+        <button :class="{isOpened}" @click="toggleList"><div class="icon-doulist">目录</div></button>
         <nav data-scroll="free" v-show="isOpened">
           <ul>
             <li :class="{'isActived':$route.params.nth==index,'icon-indicator':$route.params.nth==index}" v-for="(subject,index) in widget_infos" :key="subject.id"><a>{{ subject.title }}</a></li>
@@ -43,11 +40,12 @@
 </template>
 
 <script>
-  import ClickOutside from 'vue-click-outside'
   export default {
     name: 'header',
     data() {
       return {
+        isPlaying: true,
+        isShowed: true,
         isOpened: false
       }
     },
@@ -61,8 +59,23 @@
       share_data() {
         return JSON.parse(this.payload.share_data);
       },
+      background_musics() {
+        return JSON.parse(this.payload.background_musics)[0] || null;
+      },
+      icon_music() {
+        return this.isPlaying ? (this.isShowed ? 'data:image/gif;base64,R0lGODlhHAAcAPABAP///wAAACH5BAkeAAEAIf8LTkVUU0NBUEUyLjADAQAAACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJPjI+py+0BIngUyvrkxE3zfn2LJypkiZyooaah0x6x+SazXbsRdd/6RttlcjJiEIgTwowWZVKD/DGgzB41WnT+rNosdFq9grss8ShMXqkZBQAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJGjI+py+0PDZggPlptw3rTznCgIo5IaUrYZ67s6E5pnMHxfLe57eL9gjrtEsEDLfQiDoUy4NKYZK6QTdJTVVX+rFlp6qspAAAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJQjI+py+1vgAQQTlrdzXrytn1LKCZkeZxooKbe00ZvJzGxOeM1nCO333PtaBjFT1jUXZLAofIGXTqbTGR0ag3KsNulTcuSVrtfaXkc5q7WjAIAOw==' :
+            'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAAftJREFUSA29ljFOwzAUhglzuQBMFVL3VqyoCwdg6NR7VGLtxF06VFyALgzdYG0PUCYEEt2QUPj+1m5cYydOiHjSX9vP/3t/7SR+zk4SLM/zPrRbcA0uwDmQvYINeAIPWZa90DY3hEZgBVJN3FFtRYK6YJmqEuAptpskDHEI3sBfTTmGpaIigC/gm3wzMAY90DFQXz7NxeLCogRoG0Mrm+O/LP2nTIoDQs9bOX9vL07/mX3jm1QJ2Xm49yBmS8vbtbD0NvrWlpjNW7y9ePytmB/9o5IBsaGVveN/tEqmXdnV9b0JPfzKZ6ZgeDGxgXIA/0XqK2gKXJuVLOgwRUBUzJLg6O11bSrBheuhP7YBsRZOpZhilcvLvZBz7Tl7MSGTJEnMcPWduraW4Nb10O/EBJlLFjOCOiBc2yYLElVLzAieuWr0P5O2tIlYbEtPmVA9c+3KHUiM8Z3ro/8Bbqh/z57fHx7lYnIjQRVP11Rod/ZHMeU45NpnRIukwQ+/6TaaxMob/vBFYNI/2vwxlFzH1cAmrGrhqsq4tj/ajGDo8HbJdcUmbrDpF4e3EV0GSHI1EVNpc+24PBnBWAHWqV95mIsD/G2UaLgAG9EhBP+EV5B87V4xJCgj8RCErhq4a5lyhO8ze6niF+L/XRML2d1qW78IZ65ArM+KW7vq/wAYdECWtmmIzAAAAABJRU5ErkJggg==') :
+          'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAYCAYAAADpnJ2CAAAABGdBTUEAALGPC/xhBQAAAF1JREFUSA3tlcEKACAIQzX8/1+ujrLLEMXTPDWyiU8kt2LcH/mJ/8ianQ9LmL5XwWmiJqTjSGPcEQxxbzVDANSXQtpnCA7rSAP3pPq/QQNUrneognQm1QQhrRKj+Q9prwww1XTWTQAAAABJRU5ErkJggg==';
+      },
       widget_infos() {
         return this.$store.state[this.$route.params.kind].widget_infos;
+      }
+    },
+    watch: {
+      isPlaying() {
+        let self = this;
+        let audio = self.$refs.audio;
+        return self.isPlaying ? audio.play() : audio.pause();
       }
     },
     methods: {
@@ -76,41 +89,23 @@
             break;
         }
       },
-      toggle(){
+      showName(s) {
+        this.isShowed = s;
+      },
+      toggleMusic() {
+        this.isPlaying = !this.isPlaying;
+      },
+      toggleList() {
         this.isOpened = !this.isOpened;
       },
-      close(){
+      close() {
         this.isOpened = false;
       }
-    },
-    directives: {
-      ClickOutside
     }
   }
 </script>
 
 <style scoped>
-  ._1FeTDAJSy4B0n2YdDforJd,
-  ._3N3gMyojNGbkmBiDAQ6Ckx,
-  ._156_EfdCpjglQZFPb7o402 {
-    height: 100%
-  }
-  ._1FeTDAJSy4B0n2YdDforJd {
-    overflow: hidden;
-    position: relative
-  }
-  ._156_EfdCpjglQZFPb7o402,
-  ._239rwNG51URIVs-Fb0nHQc {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0)
-  }
-  ._239rwNG51URIVs-Fb0nHQc {
-    position: relative;
-    will-change: top
-  }
-  ._239rwNG51URIVs-Fb0nHQc ._3N3gMyojNGbkmBiDAQ6Ckx {
-    height: 100vh
-  }
   .fixed-header {
     position: absolute;
     max-width: 1024px;
@@ -163,34 +158,66 @@
     padding-left: .5rem;
     border-left: 1px solid #fff
   }
-  .sJfenVynts_hV20EZwl4W {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    background: transparent;
-    border: 1px solid #fff;
-    position: absolute;
-    bottom: 1.5rem;
-    right: 2rem;
-    mix-blend-mode: difference;
-    z-index: 3
+  .share-to {
+    position: relative
   }
-  .sJfenVynts_hV20EZwl4W div {
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    margin-top: .5em
+  .share-to>span {
+    cursor: pointer
+  }
+  .share-to:hover .share-board {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
+  }
+  .share-board {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-sizing: border-box;
+    padding: 20px;
+    color: #fff;
+    display: none
   }
   @media only screen and (max-width:414px) {
-    .sJfenVynts_hV20EZwl4W {
-      height: 2rem;
-      border: 0;
-      left: 50%;
-      right: auto;
-      bottom: 1rem;
+    .share-board {
+      left: 2.5em;
       -webkit-transform: translateX(-50%);
       transform: translateX(-50%)
     }
+  }
+  .share-board:after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #222;
+    border-radius: 4px;
+    z-index: -1
+  }
+  .share-board>* {
+    margin-top: 5px
+  }
+  .share-board li {
+    cursor: pointer;
+    white-space: nowrap
+  }
+  .share-board li+li {
+    margin-top: 20px
+  }
+  .share-board li:last-child {
+    cursor: default
+  }
+  .qr-code {
+    padding-left: 20px;
+    border-left: 1px solid #333;
+    margin-left: 20px;
+    width: 90px
+  }
+  .qr-code img {
+    width: 100%;
+    height: 90px
   }
   .page-view {
     margin-left: .5rem
@@ -262,67 +289,6 @@
   .doulist .isActived a,
   .doulist a:hover {
     color: #fff
-  }
-  .share-board {
-    position: relative
-  }
-  .share-board>span {
-    cursor: pointer
-  }
-  .share-board:hover .share-to {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex
-  }
-  .share-to {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    box-sizing: border-box;
-    padding: 20px;
-    color: #fff;
-    display: none
-  }
-  @media only screen and (max-width:414px) {
-    .share-to {
-      left: 2.5em;
-      -webkit-transform: translateX(-50%);
-      transform: translateX(-50%)
-    }
-  }
-  .share-to:after {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #222;
-    border-radius: 4px;
-    z-index: -1
-  }
-  .share-to>* {
-    margin-top: 5px
-  }
-  .share-to li {
-    cursor: pointer;
-    white-space: nowrap
-  }
-  .share-to li+li {
-    margin-top: 20px
-  }
-  .share-to li:last-child {
-    cursor: default
-  }
-  .qr-code {
-    padding-left: 20px;
-    border-left: 1px solid #333;
-    margin-left: 20px;
-    width: 90px
-  }
-  .qr-code img {
-    width: 100%;
-    height: 90px
   }
   .doulist {
     position: relative;
