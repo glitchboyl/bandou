@@ -30,7 +30,15 @@ router.beforeEach((to, from, next) => {
       if (!store.getters[`${params.kind}WidgetsLength`]) {
         store.dispatch(`get-${params.kind}-annual-2016`);
       }
-      store.dispatch(`get-${params.kind}-widget-infos`, params.nth);
+      if(typeof store.state[params.kind].subjects[params.nth] == 'undefined'){
+        if(params.nth == 0){
+          store.dispatch(`get-${params.kind}-widget-infos`, 0);
+          store.dispatch(`get-${params.kind}-widget-infos`, 1);
+          store.dispatch(`get-${params.kind}-widget-infos`, 2);
+        } else{
+          console.log(store.getters[`${params.kind}WidgetsLength`])
+        }
+      }
       next();
     }
   } else
@@ -44,5 +52,8 @@ export default new Vue({
   el: '#app',
   router,
   store,
+  mounted(){
+    console.log(this)
+  },
   render: h => h(App)
 });
