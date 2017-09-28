@@ -19,10 +19,9 @@
 <script>
   export default {
     props: ['payload'],
-    data() {
-      let self = this;
-      return {
-        video: `/resources?request=${self.payload.video}`
+    computed: {
+      video() {
+        return `/resources?request=${this.payload.video}`;
       }
     }
   }

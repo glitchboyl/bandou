@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@tweenjs/tween.js": "^17.1.1",
     "axios": "^0.16.2",
     "jsonp": "^0.2.1",
     "request": "^2.81.0",

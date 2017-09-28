@@ -1,11 +1,14 @@
 ﻿<template>
-  <div class="main-container" :style="{transform: `translate3d(0px, ${-100 * $route.params.nth}%, 0px)`}">
-    <component v-for="(section,index) in subjects" v-if="section" :payload="section.payload" :subjects="section.subjects" :user="section.user" :is="section.kind_str" :key="section.id"></component>
-    <section class="section" v-else></section>
-  </div>
+  <transition name="fade">
+    <div class="main-container" :style="{transform: `translate3d(0px, ${Y}%, 0px)`}" @wheel.prevent="scroll($event)">
+      <component v-for="(section,index) in subjects" v-if="section" :payload="section.payload" :subjects="section.subjects" :user="section.user" :is="section.kind_str" :key="section.id"></component>
+      <section class="section" v-else></section>
+    </div>
+  </transition>
 </template>
 
 <script>
+  import TWEEN from '@tweenjs/tween.js';
   import start_page from '@/components/startPage';
   import top10 from '@/components/top10';
   import dialogue from '@/components/dialogue';
@@ -15,9 +18,51 @@
   import unknown from '@/components/unknown';
   export default {
     name: 'main',
+    data() {
+      return {
+        resolve: true,
+        Y: -100 * this.$route.params.nth
+      }
+    },
     computed: {
       subjects() {
         return this.$store.state[this.$route.params.kind].subjects;
+      }
+    },
+    methods: {
+      scroll(e) {
+        let self = this;
+        if (self.resolve) {
+          self.resolve = false;
+          let [oldY, newY] = [parseInt(self.Y), parseInt(self.Y)];
+          if (e.deltaY == 100)
+            newY -= 100;
+          else if (e.deltaY == -100)
+            newY += 100;
+          if (Math.abs(newY / -100) <= 2) {
+            function animate() {
+              if (TWEEN.update()) {
+                requestAnimationFrame(animate);
+              }
+            }
+            new TWEEN.Tween({
+                tweeningNumber: oldY
+              })
+              .easing(TWEEN.Easing.Quadratic.Out)
+              .to({
+                tweeningNumber: newY
+              }, 800)
+              .onUpdate((that) => {
+                self.Y = that.tweeningNumber.toFixed(2);
+                self.resolve = (self.Y == newY);
+              })
+              .start();
+            animate();
+          } else {
+            self.resolve = true;
+          }
+          // console.log(self.$route.params.nth >= self.$store.getters[`${self.$route.params.kind}WidgetsLength`])
+        }
       }
     },
     components: {

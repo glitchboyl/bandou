@@ -8,7 +8,7 @@
           </div>
           <svg class="cover"><image xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="subject.cover" x="0" y="0" width="100%" height="100%" clip-path="url(#clipper)" preserveAspectRatio="xMidYMid slice"></image></svg>
           <div class="title">
-            {{ subject.title }}
+            {{ subject.title.length >= 9 ? subject.title.substr(0,5) + '...' : subject.title }}
             <span class="rating">{{ subject.rating.toFixed(1) }}</span></div>
         </a>
       </li>
