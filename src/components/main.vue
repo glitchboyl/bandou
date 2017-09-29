@@ -1,10 +1,8 @@
 ﻿<template>
-  <transition name="fade">
-    <div class="main-container" :style="{transform: `translate3d(0px, ${Y}%, 0px)`}" @wheel.prevent="scroll($event)">
-      <component v-for="(section,index) in subjects" v-if="section" :payload="section.payload" :subjects="section.subjects" :user="section.user" :is="section.kind_str" :key="section.id"></component>
-      <section class="section" v-else></section>
-    </div>
-  </transition>
+  <div class="main-container" :style="{transform: `translate3d(0px, ${Y}%, 0px)`}" @wheel.prevent="scroll($event)">
+    <component v-for="(section,index) in subjects" v-if="section" :payload="section.payload" :subjects="section.subjects" :user="section.user" :is="section.kind_str" :key="section.id"></component>
+    <section class="section" v-else></section>
+  </div>
 </template>
 
 <script>

@@ -21,25 +21,38 @@ router.beforeEach((to, from, next) => {
       return kind == params.kind;
     })
   ) {
-    if (!params.nth && params.nth !== 0)
+    if (!parseInt(params.nth) && parseInt(params.nth) !== 0)
       next({
         path: `/${params.kind}/annual2016/0`,
         query: null
       });
     else {
-      if (!store.getters[`${params.kind}WidgetsLength`]) {
-        store.dispatch(`get-${params.kind}-annual-2016`);
-      }
-      if(typeof store.state[params.kind].subjects[params.nth] == 'undefined'){
-        if(params.nth == 0){
-          store.dispatch(`get-${params.kind}-widget-infos`, 0);
-          store.dispatch(`get-${params.kind}-widget-infos`, 1);
-          store.dispatch(`get-${params.kind}-widget-infos`, 2);
-        } else{
-          console.log(store.getters[`${params.kind}WidgetsLength`])
+      function fn() {
+        if (typeof store.state[params.kind].subjects[parseInt(params.nth)] == 'undefined') {
+          if (parseInt(params.nth) == 0) {
+            store.dispatch(`get-${params.kind}-widget-infos`, 0);
+            store.dispatch(`get-${params.kind}-widget-infos`, 1);
+            store.dispatch(`get-${params.kind}-widget-infos`, 2);
+          } else {
+            store.dispatch(`get-${params.kind}-widget-infos`, parseInt(params.nth) - 1);
+            store.dispatch(`get-${params.kind}-widget-infos`, parseInt(params.nth));
+            if(parseInt(params.nth) + 1 != store.getters[`${params.kind}WidgetsLength`])
+              store.dispatch(`get-${params.kind}-widget-infos`, parseInt(params.nth) + 1);
+          }
+        } else {
+          if (parseInt(params.nth) + 2 < store.getters[`${params.kind}WidgetsLength`] && typeof store.state[params.kind].subjects[parseInt(params.nth) + 2] == 'undefined') {
+            store.dispatch(`get-${params.kind}-widget-infos`, parseInt(params.nth) + 2);
+          }
         }
+        next();
       }
-      next();
+      if (!store.getters[`${params.kind}WidgetsLength`]) {
+        store.dispatch(`get-${params.kind}-annual-2016`, {
+          fn
+        });
+      } else {
+        fn();
+      }
     }
   } else
     next({
@@ -52,8 +65,5 @@ export default new Vue({
   el: '#app',
   router,
   store,
-  mounted(){
-    console.log(this)
-  },
   render: h => h(App)
 });

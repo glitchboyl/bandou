@@ -2,8 +2,9 @@
   <div id="app">
     <div data-reactroot>
       <div class="app-container">
-        <fixed-header v-if="widgetInfosLength > 0"></fixed-header>
-        <router-view v-if="widgetInfosLength > 0"></router-view>
+        <fixed-header v-if="subjectsLength > 0"></fixed-header>
+        <router-view v-if="subjectsLength > 0"></router-view>
+        <down-button v-if="subjectsLength > 0"></down-button>
       </div>
     </div>
   </div>
@@ -11,15 +12,17 @@
 
 <script>
   import fixedHeader from './components/header';
+  import downButton from './components/common/downButton';
   export default {
     name: 'app',
     computed: {
-      widgetInfosLength() {
-        return this.$store.getters[`${this.$route.params.kind}WidgetsLength`];
+      subjectsLength() {
+        return this.$store.getters[`${this.$route.params.kind}SubjectsLength`];
       }
     },
     components: {
-      fixedHeader
+      fixedHeader,
+      downButton
     }
   }
 </script>

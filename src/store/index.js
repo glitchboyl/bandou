@@ -11,31 +11,36 @@ const state = {
     pv: 0,
     payload: null,
     widget_infos: [],
-    subjects: []
+    subjects: [],
+    subjects_length: 0
   },
   game: {
     pv: 0,
     payload: null,
     widget_infos: [],
-    subjects: []
+    subjects: [],
+    subjects_length: 0
   },
   book: {
     pv: 0,
     payload: null,
     widget_infos: [],
-    subjects: []
+    subjects: [],
+    subjects_length: 0
   },
   drama: {
     pv: 0,
     payload: null,
     widget_infos: [],
-    subjects: []
+    subjects: [],
+    subjects_length: 0
   },
   music: {
     pv: 0,
     payload: null,
     widget_infos: [],
-    subjects: []
+    subjects: [],
+    subjects_length: 0
   }
 }
 

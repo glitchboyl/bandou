@@ -4,6 +4,9 @@
     if (total) total -= 1;
     return total;
   },
+  movieSubjectsLength: state => {
+    return state.movie.subjects_length;
+  },
   gameWidgetsLength: state => {
     let total = state.game.widget_infos.length;
     if (total) total -= 1;

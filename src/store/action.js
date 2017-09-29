@@ -15,8 +15,9 @@ import {
 export default {
   [getMovieAnnual2016]({
     commit
-  }) {
-    Axios.get('/movie_annual2016').then(function (res) {
+  }, {fn}) {
+    (async() => {
+      let res = await Axios.get('/movie_annual2016')
       let {
         pv,
         payload,
@@ -26,8 +27,21 @@ export default {
         pv,
         payload,
         widget_infos
-      });
-    })
+      })
+      fn()
+    })()
+    // Axios.get('/movie_annual2016').then(function (res) {
+    //   let {
+    //     pv,
+    //     payload,
+    //     widget_infos
+    //   } = res.data.res;
+    //   commit('set-movie-annual-2016', {
+    //     pv,
+    //     payload,
+    //     widget_infos
+    //   });
+    // })
   },
   [getMovieWidgetInfos]({
     commit

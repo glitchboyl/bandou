@@ -26,6 +26,7 @@ export default {
     subject
   }) {
     state.movie.subjects[nth] = subject;
+    state.movie.subjects_length = state.movie.subjects.length;
   },
   [setGameAnnual2016](state, {
     pv,

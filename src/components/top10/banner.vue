@@ -23,11 +23,11 @@
               <div class="react-rater is-disabled">
                 <a v-for="i in 5" :class="{'is-active': i <= parseInt(subject.rating)/2,'is-active-half': i * 2 - parseInt(subject.rating) == 1}" :key="i">★</a>
               </div>
-              <span>{{ subject.rating }}</span>
+              <span>{{ subject.rating.toFixed(1) }}</span>
               <span>{{ subject.rating_count }} 人评价</span>
             </div>
             <div class="description">
-              {{ payload.description }}<a :href="user.url" target="_blank">{{ user.name }}</a></div>
+              {{ payload.description }}<a :href="user.url" target="_blank" v-if="user">{{ user.name }}</a></div>
           </div>
         </div>
       </div>
