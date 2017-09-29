@@ -1,11 +1,11 @@
 ﻿<template>
-  <button class="down-button" data-tap="true">
-        <div class="icon-down"></div>
-      </button>
+  <button class="down-button" data-tap="true" @click="scroll({deltaY:100})"><div class="icon-down"></div></button>
 </template>
 
 <script>
-  export default {}
+  export default {
+    props: ['scroll']
+  }
 </script>
 
 <style scoped>

@@ -31,7 +31,7 @@
         <button :class="{isOpened}" @click="toggleList"><div class="icon-doulist">目录</div></button>
         <nav data-scroll="free" v-show="isOpened">
           <ul>
-            <li :class="{'isActived':$route.params.nth==index,'icon-indicator':$route.params.nth==index}" v-for="(subject,index) in widget_infos" :key="subject.id"><a>{{ subject.title }}</a></li>
+            <li :class="{'isActived':$route.params.nth==index,'icon-indicator':$route.params.nth==index}" v-for="(subject,index) in widget_infos" v-if="subject.title != '留言板'" :key="subject.id"><a>{{ subject.title }}</a></li>
           </ul>
         </nav>
       </aside>
