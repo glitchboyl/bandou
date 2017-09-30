@@ -1,11 +1,10 @@
 ﻿<template>
-  <button class="down-button" data-tap="true">
-        <div class="icon-down"></div>
-      </button>
+  <button class="down-button" data-tap="true"><div class="icon-down"></div></button>
 </template>
 
 <script>
-  export default {}
+  export default {
+  }
 </script>
 
 <style scoped>

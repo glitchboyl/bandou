@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-cloak>
     <div data-reactroot>
       <div class="app-container">
         <fixed-header v-if="subjectsLength > 0"></fixed-header>
@@ -11,10 +11,18 @@
 </template>
 
 <script>
+  import TWEEN from '@tweenjs/tween.js';
   import fixedHeader from './components/header';
   import downButton from './components/common/downButton';
   export default {
     name: 'app',
+    data() {
+      let self = this;
+      return {
+        resolve: true,
+        Y: 0
+      }
+    },
     computed: {
       subjectsLength() {
         return this.$store.getters[`${this.$route.params.kind}SubjectsLength`];
@@ -32,6 +40,9 @@
 
 <style>
   @import './assets/style/common.css';
+  [v-cloak] {
+    display: none;
+  }
   #app,
   [data-reactroot],
   body,
