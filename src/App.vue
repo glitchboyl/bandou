@@ -16,13 +16,6 @@
   import downButton from './components/common/downButton';
   export default {
     name: 'app',
-    data() {
-      let self = this;
-      return {
-        resolve: true,
-        Y: 0
-      }
-    },
     computed: {
       subjectsLength() {
         return this.$store.getters[`${this.$route.params.kind}SubjectsLength`];
