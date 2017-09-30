@@ -3,7 +3,7 @@
     <div data-reactroot>
       <div class="app-container">
         <fixed-header v-if="subjectsLength > 0"></fixed-header>
-        <router-view v-if="subjectsLength > 0"></router-view>
+        <router-view v-if="subjectsLength > 0" :style="{transform: `translate3d(0px, ${Y}%, 0px)`}"></router-view>
         <down-button v-if="subjectsLength > 0"></down-button>
       </div>
     </div>
@@ -18,6 +18,9 @@
     computed: {
       subjectsLength() {
         return this.$store.getters[`${this.$route.params.kind}SubjectsLength`];
+      },
+      Y() {
+        return this.$store.state.Y;
       }
     },
     components: {

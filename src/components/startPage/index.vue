@@ -69,7 +69,7 @@
     max-height: 32rem;
   }
   .video-background {
-    z-index: 0;
+    z-index: -1;
   }
   .video-background,
   .video-background video {

@@ -15,9 +15,11 @@ import {
 export default {
   [getMovieAnnual2016]({
     commit
-  }, {fn}) {
+  }, {
+    fn
+  }) {
     (async() => {
-      let res = await Axios.get('/movie_annual2016')
+      let res = await Axios.get('/movie_annual2016');
       let {
         pv,
         payload,
@@ -28,25 +30,18 @@ export default {
         payload,
         widget_infos
       })
-      fn()
+      if (fn && typeof fn === 'function')
+        fn();
     })()
-    // Axios.get('/movie_annual2016').then(function (res) {
-    //   let {
-    //     pv,
-    //     payload,
-    //     widget_infos
-    //   } = res.data.res;
-    //   commit('set-movie-annual-2016', {
-    //     pv,
-    //     payload,
-    //     widget_infos
-    //   });
-    // })
   },
   [getMovieWidgetInfos]({
     commit
-  }, nth) {
-    Axios.get(`/movie_annual2016/widget?nth=${nth}`).then(function (res) {
+  }, {
+    nth,
+    fn
+  }) {
+    (async() => {
+      let res = await Axios.get(`/movie_annual2016/widget?nth=${nth}`);
       let {
         id,
         kind_str,
@@ -64,7 +59,9 @@ export default {
           user
         }
       });
-    })
+      if (fn && typeof fn === 'function')
+        fn();
+    })()
   },
   [getGameAnnual2016]({
     commit

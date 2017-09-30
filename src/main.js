@@ -27,24 +27,52 @@ router.beforeEach((to, from, next) => {
         query: null
       });
     else {
+      store.commit('set-y', {
+        y: -100 * parseInt(params.nth)
+      });
+
       function fn() {
         if (typeof store.state[params.kind].subjects[parseInt(params.nth)] == 'undefined') {
-          if (parseInt(params.nth) == 0) {
-            store.dispatch(`get-${params.kind}-widget-infos`, 0);
-            store.dispatch(`get-${params.kind}-widget-infos`, 1);
-            store.dispatch(`get-${params.kind}-widget-infos`, 2);
-          } else {
-            store.dispatch(`get-${params.kind}-widget-infos`, parseInt(params.nth) - 1);
-            store.dispatch(`get-${params.kind}-widget-infos`, parseInt(params.nth));
-            if(parseInt(params.nth) + 1 != store.getters[`${params.kind}WidgetsLength`])
-              store.dispatch(`get-${params.kind}-widget-infos`, parseInt(params.nth) + 1);
-          }
+          if (parseInt(params.nth) == 0)
+            store.dispatch(`get-${params.kind}-widget-infos`, {
+              nth: 0,
+              fn() {
+                store.dispatch(`get-${params.kind}-widget-infos`, {
+                  nth: 1,
+                  fn() {
+                    store.dispatch(`get-${params.kind}-widget-infos`, {
+                      nth: 2,
+                      fn: next
+                    });
+                  }
+                });
+              }
+            });
+          else
+            store.dispatch(`get-${params.kind}-widget-infos`, {
+              nth: parseInt(params.nth),
+              fn() {
+                store.dispatch(`get-${params.kind}-widget-infos`, {
+                  nth: parseInt(params.nth) - 1,
+                  fn() {
+                    if (parseInt(params.nth) + 1 != store.getters[`${params.kind}WidgetsLength`])
+                      store.dispatch(`get-${params.kind}-widget-infos`, {
+                        nth: parseInt(params.nth) + 1,
+                        fn: next
+                      });
+                    else next();
+                  }
+                });
+              }
+            });
         } else {
-          if (parseInt(params.nth) + 2 < store.getters[`${params.kind}WidgetsLength`] && typeof store.state[params.kind].subjects[parseInt(params.nth) + 2] == 'undefined') {
-            store.dispatch(`get-${params.kind}-widget-infos`, parseInt(params.nth) + 2);
-          }
+          if (parseInt(params.nth) + 2 < store.getters[`${params.kind}WidgetsLength`] && typeof store.state[params.kind].subjects[parseInt(params.nth) + 2] == 'undefined')
+            store.dispatch(`get-${params.kind}-widget-infos`, {
+              nth: parseInt(params.nth) + 2,
+              fn: next
+            });
+          else next();
         }
-        next();
       }
       if (!store.getters[`${params.kind}WidgetsLength`]) {
         store.dispatch(`get-${params.kind}-annual-2016`, {

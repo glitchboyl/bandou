@@ -18,3 +18,5 @@ export const getMusicAnnual2016 = 'get-music-annual-2016';
 export const setMusicAnnual2016 = 'set-music-annual-2016';
 export const getMusicWidgetInfos = 'get-music-widget-infos';
 export const setMusicWidgetInfos = 'set-music-widget-infos';
+export const setY = 'set-y';
+export const changeStatus = 'change-status';

@@ -41,7 +41,9 @@ const state = {
     widget_infos: [],
     subjects: [],
     subjects_length: 0
-  }
+  },
+  Y: 0,
+  resolve: true
 }
 
 export default new Vuex.Store({

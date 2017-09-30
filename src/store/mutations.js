@@ -9,6 +9,8 @@
   setDramaWidgetInfos,
   setMusicAnnual2016,
   setMusicWidgetInfos,
+  setY,
+  changeStatus,
 } from './mutations-types';
 
 export default {
@@ -87,5 +89,15 @@ export default {
     subject
   }) {
     state.music.subjects[nth] = subject;
+  },
+  [setY](state, {
+    y
+  }) {
+    state.Y = parseInt(y);
+  },
+  [changeStatus](state, {
+    status
+  }) {
+    state.resolve = status;
   },
 }
