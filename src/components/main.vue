@@ -1,6 +1,6 @@
 ﻿<template>
   <div class="main-container" @wheel.prevent.capture="scroll($event)">
-    <component v-for="section in subjects" v-if="section" :payload="section.payload" :subjects="section.subjects" :user="section.user" :is="section.kind_str" :key="section.id"></component>
+    <component v-for="section in subjects" v-if="section" :payload="section.payload" :subject="section.subject" :subjects="section.subjects" :user="section.user" :is="section.kind_str" :key="section.id"></component>
     <unknown v-else></unknown>
   </div>
 </template>

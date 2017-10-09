@@ -46,6 +46,7 @@ export default {
         id,
         kind_str,
         payload,
+        subject,
         subjects,
         user
       } = res.data.res;
@@ -55,6 +56,7 @@ export default {
           id,
           kind_str,
           payload,
+          subject,
           subjects,
           user
         }

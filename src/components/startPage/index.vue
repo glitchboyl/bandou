@@ -21,7 +21,7 @@
     props: ['payload'],
     computed: {
       video() {
-        return `/resources?request=${this.payload.video}`;
+        return `/resources?type=video&request=${this.payload.video}`;
       }
     }
   }

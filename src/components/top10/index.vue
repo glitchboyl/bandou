@@ -1,6 +1,6 @@
 ﻿<template>
   <section class="section">
-    <div class="top10-container" :style="{backgroundImage: `url('${payload.background_img}')`}">
+    <div class="top10-container" :style="{backgroundImage: `url('${backgroundImg}')`}">
       <div class="top10-content">
         <div class="top10">
           <banner :payload="payload" :subject="subjects[0]" :user="user"></banner>
@@ -16,6 +16,11 @@
   import subjects from './subjects'
   export default {
     props: ['payload', 'subjects', 'user'],
+    computed: {
+      backgroundImg() {
+        return `/resources?type=image&request=${this.payload.background_img}`;
+      }
+    },
     components: {
       banner,
       subjects

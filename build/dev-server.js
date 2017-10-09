@@ -101,12 +101,17 @@ interface.get('/movie_annual2016/widget', function (req, res) {
 })
 interface.get('/resources', function (req, res) {
   var resources = req.query.request || null;
+  var resType = req.query.type || null;
   if (resources.substr(0, 4) != 'http') resources = `http:${resources}`
   var options = {
     url: resources,
     encoding: null
   };
-  res.setHeader('Content-Type', 'video/mp4');
+  if (resType == 'video') {
+    res.setHeader('Content-Type', 'video/mp4');
+  } else if (resType == 'image') {
+    res.setHeader('Content-Type', 'image/jpeg');
+  }
   rp(options).then(function (repos) {
     res.send(repos);
   });

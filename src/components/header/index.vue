@@ -15,7 +15,7 @@
               <li class="icon-weibo" @click="share_to('sina',share_data.sina)">分享到微博</li>
               <li class="icon-wechat">扫码分享到微信</li>
             </ul>
-            <div class="qr-code"><img :src="payload.qr_img"></div>
+            <div class="qr-code"><img :src="qrImg"></div>
           </div>
         </div>
       </div>
@@ -58,6 +58,9 @@
       },
       share_data() {
         return JSON.parse(this.payload.share_data);
+      },
+      qrImg() {
+        return `/resources?type=image&request=${this.payload.qr_img}`;
       },
       background_musics() {
         return JSON.parse(this.payload.background_musics)[0] || null;
