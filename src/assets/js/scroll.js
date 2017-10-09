@@ -43,16 +43,20 @@ export default function (e) {
         .easing(TWEEN.Easing.Quadratic.Out)
         .to({
           tweeningNumber: newY
-        }, 600)
+        }, 650)
         .onUpdate(that => {
           self.$store.commit('set-y', {
             y: that.tweeningNumber.toFixed(2)
           });
+        })
+        .onComplete(() => {
           if (self.$store.state.Y == newY && !(self.$store.state.Y % 100)) {
-            self.$store.commit('change-status', {
-              status: true
-            });
-            self.$router.push(`/${kind}/annual2016/${parseInt(Math.abs(newY / -100))}`);
+            setTimeout(function () {
+              self.$store.commit('change-status', {
+                status: true
+              });
+              self.$router.push(`/${kind}/annual2016/${parseInt(Math.abs(newY / -100))}`);
+            }, 300);
           }
         })
         .start();

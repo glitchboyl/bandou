@@ -15,55 +15,54 @@ import {
 export default {
   [getMovieAnnual2016]({
     commit
-  }, {
-    fn
   }) {
-    (async() => {
-      let res = await Axios.get('/movie_annual2016');
-      let {
-        pv,
-        payload,
-        widget_infos
-      } = res.data.res;
-      commit('set-movie-annual-2016', {
-        pv,
-        payload,
-        widget_infos
-      })
-      if (fn && typeof fn === 'function')
-        fn();
-    })()
+    return new Promise(function (resolve, reject) {
+      (async() => {
+        let res = await Axios.get('/movie_annual2016');
+        let {
+          pv,
+          payload,
+          widget_infos
+        } = res.data.res;
+        commit('set-movie-annual-2016', {
+          pv,
+          payload,
+          widget_infos
+        });
+        resolve();
+      })()
+    })
   },
   [getMovieWidgetInfos]({
     commit
   }, {
-    nth,
-    fn
+    nth
   }) {
-    (async() => {
-      let res = await Axios.get(`/movie_annual2016/widget?nth=${nth}`);
-      let {
-        id,
-        kind_str,
-        payload,
-        subject,
-        subjects,
-        user
-      } = res.data.res;
-      commit('set-movie-widget-infos', {
-        nth,
-        subject: {
+    return new Promise(function (resolve, reject) {
+      (async() => {
+        let res = await Axios.get(`/movie_annual2016/widget?nth=${nth}`);
+        let {
           id,
           kind_str,
           payload,
           subject,
           subjects,
           user
-        }
-      });
-      if (fn && typeof fn === 'function')
-        fn();
-    })()
+        } = res.data.res;
+        commit('set-movie-widget-infos', {
+          nth,
+          subject: {
+            id,
+            kind_str,
+            payload,
+            subject,
+            subjects,
+            user
+          }
+        });
+        resolve();
+      })()
+    })
   },
   [getGameAnnual2016]({
     commit
