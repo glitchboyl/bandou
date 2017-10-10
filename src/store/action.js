@@ -47,6 +47,7 @@ export default {
           payload,
           subject,
           subjects,
+          people,
           user
         } = res.data.res;
         commit('set-movie-widget-infos', {
@@ -57,6 +58,7 @@ export default {
             payload,
             subject,
             subjects,
+            people,
             user
           }
         });
