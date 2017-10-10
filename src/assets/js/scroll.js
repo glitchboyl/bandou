@@ -34,8 +34,8 @@ export default function (e) {
     }
     if (parseInt(Math.abs(newY / -100)) <= self.$store.getters[`${kind}WidgetsLength`]) {
       function animate() {
-        if (TWEEN.update())
-          requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
+        TWEEN.update()
       }
       new TWEEN.Tween({
           tweeningNumber: oldY
@@ -43,7 +43,7 @@ export default function (e) {
         .easing(TWEEN.Easing.Quadratic.Out)
         .to({
           tweeningNumber: newY
-        }, 650)
+        }, 500)
         .onUpdate(that => {
           self.$store.commit('set-y', {
             y: that.tweeningNumber.toFixed(2)

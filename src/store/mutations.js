@@ -93,7 +93,7 @@ export default {
   [setY](state, {
     y
   }) {
-    state.Y = parseInt(y);
+    state.Y = y;
   },
   [changeStatus](state, {
     status

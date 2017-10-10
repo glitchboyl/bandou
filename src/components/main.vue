@@ -17,6 +17,20 @@
   import unknown from '@/components/unknown';
   export default {
     name: 'main',
+    mounted() {
+      this.$nextTick(() => {
+        window.addEventListener('keyup', e => {
+          if (e.keyCode == 38)
+            this.scroll({
+              deltaY: -100
+            });
+          else if (e.keyCode == 40)
+            this.scroll({
+              deltaY: 100
+            });
+        })
+      })
+    },
     computed: {
       subjects() {
         return this.$store.state[this.$route.params.kind].subjects;
