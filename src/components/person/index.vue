@@ -1,8 +1,8 @@
 ﻿<template>
   <section class="section">
     <div class="person-container" :style="{backgroundImage: `url('${backgroundImg}')`}">
-      <div class="person-content">
-        <div class="person-holder person">
+      <div class="person-holder">
+        <div class="person-content person">
           <div class="sub-background" :style="{backgroundColor: payload.sub_background_color}"></div>
           <banner :payload="payload" :people="people[0]"></banner>
           <people :people="people"></people>
@@ -40,7 +40,7 @@
     background-position: 50%;
     z-index: 0
   }
-  .person-content {
+  .person-holder {
     width: 100%;
     height: 100%;
     padding: 60px 0 80px;
@@ -58,11 +58,11 @@
     z-index: 1
   }
   @media only screen and (max-width:414px) {
-    .person-content {
+    .person-holder {
       padding: 40px 0 50px
     }
   }
-  .person-holder {
+  .person-content {
     width: 100%;
     height: 100%;
     display: -webkit-box;
