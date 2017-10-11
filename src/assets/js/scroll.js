@@ -51,12 +51,18 @@ export default function (e) {
         })
         .onComplete(() => {
           if (self.$store.state.Y == newY && !(self.$store.state.Y % 100)) {
-            setTimeout(function () {
-              self.$store.commit('change-status', {
-                status: true
-              });
-              self.$router.push(`/${kind}/annual2016/${parseInt(Math.abs(newY / -100))}`);
-            }, 300);
+            new Promise(function (resolve, reject) {
+              setTimeout(function () {
+                self.$router.push(`/${kind}/annual2016/${parseInt(Math.abs(newY / -100))}`);
+                resolve();
+              }, 300);
+            }).then(() => {
+              setTimeout(function () {
+                self.$store.commit('change-status', {
+                  status: true
+                });
+              }, 50);
+            })
           }
         })
         .start();

@@ -40,8 +40,11 @@
       });
     },
     computed: {
+      isPhone(){
+        return this.$store.state.isPhone;
+      },
       backgroundImg() {
-        return `/resources?type=image&request=${this.payload.background_img}`;
+        return `/resources?type=image&request=${this.isPhone ? this.payload.mobile_background_img : this.payload.background_img}`;
       }
     }
   }

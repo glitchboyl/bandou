@@ -19,13 +19,13 @@
           </div>
         </div>
       </div>
-      <span class="page-view">共 {{ pv }} 人访问</span>
+      <span class="page-view" v-show="!isPhone">共 {{ pv }} 人访问</span>
     </div>
     <div class="right-part">
       <div class="background-music" v-if="background_musics" @mouseover="showName(false)" @mouseout="showName(true)" @click="toggleMusic">
-        <img class="icon-music" :src="icon_music">
-        <span class="music-title">{{ isPlaying ? (isShowed ? background_musics.name : '关闭背景音乐') : '播放背景音乐'}}</span>
-        <audio :src="background_musics.url" autoplay loop style="display: none;" ref="audio"></audio>
+        <img class="icon-music" :src="icon_music" v-show="!isPhone">
+        <span class="music-title" v-show="!isPhone">{{ isPlaying ? (isShowed ? background_musics.name : '关闭背景音乐') : '播放背景音乐'}}</span>
+        <audio :src="background_musics.url" :autoplay="!isPhone" :loop="!isPhone"  style="display: none;" ref="audio"></audio>
       </div>
       <aside class="doulist" v-click-outside="close">
         <button :class="{isOpened}" @click="toggleList"><div class="icon-doulist">目录</div></button>
@@ -67,6 +67,9 @@
         }
       }
     },
+    mounted(){
+      this.isPlaying = !this.isPhone;
+    },
     computed: {
       pv() {
         return this.$store.state[this.$route.params.kind].pv.replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
@@ -90,10 +93,17 @@
       },
       widget_infos() {
         return this.$store.state[this.$route.params.kind].widget_infos;
+      },
+      isPhone(){
+        return this.$store.state.isPhone;
       }
     },
     watch: {
+      isPhone(){
+        this.isPlaying = !this.isPhone;
+      },
       isPlaying() {
+        console.log('ass')
         let self = this;
         let audio = self.$refs.audio;
         return self.isPlaying ? audio.play() : audio.pause();

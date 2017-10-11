@@ -6,7 +6,7 @@
           <div class="video-background">
             <video loop="" autoplay=""><source :src="video" type="video/mp4"></video>
           </div>
-          <h1 style="margin-top: -10px;"><img :src="payload.title_img"></h1>
+          <h1 style="margin-top: -10px;"><img :src="titleImg"></h1>
           <div class="desc-container">
             <div>{{ payload.description }}</div>
           </div>
@@ -20,8 +20,14 @@
   export default {
     props: ['payload'],
     computed: {
+      isPhone() {
+        return this.$store.state.isPhone;
+      },
       video() {
-        return `/resources?type=video&request=${this.payload.video}`;
+        return `/resources?type=video&request=${this.isPhone ? this.payload.mobile_background_img : this.payload.video}`;
+      },
+      titleImg() {
+        return `/resources?type=image&request=${this.isPhone ? this.payload.mobile_title_img : this.payload.title_img}`;
       }
     }
   }

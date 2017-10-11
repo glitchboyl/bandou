@@ -11,6 +11,7 @@
   setMusicWidgetInfos,
   setY,
   changeStatus,
+  changeView,
 } from './mutations-types';
 
 export default {
@@ -99,5 +100,10 @@ export default {
     status
   }) {
     state.resolve = status;
+  },
+  [changeView](state, {
+    status
+  }) {
+    state.isPhone = status;
   },
 }

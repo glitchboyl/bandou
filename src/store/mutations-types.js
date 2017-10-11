@@ -20,3 +20,4 @@ export const getMusicWidgetInfos = 'get-music-widget-infos';
 export const setMusicWidgetInfos = 'set-music-widget-infos';
 export const setY = 'set-y';
 export const changeStatus = 'change-status';
+export const changeView = 'change-view';

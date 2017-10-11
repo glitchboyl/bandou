@@ -17,23 +17,54 @@
   import unknown from '@/components/unknown';
   export default {
     name: 'main',
+    data() {
+      return {
+        screenWidth: document.body.clientWidth,
+        resolve: true
+      }
+    },
     mounted() {
-      this.$nextTick(() => {
+      let self = this;
+      self.$nextTick(() => {
         window.addEventListener('keyup', e => {
           if (e.keyCode == 38)
-            this.scroll({
+            self.scroll({
               deltaY: -100
             });
           else if (e.keyCode == 40)
-            this.scroll({
+            self.scroll({
               deltaY: 100
             });
-        })
+        });
+        window.addEventListener('resize', () => {
+          return (() => {
+            self.screenWidth = document.body.clientWidth
+          })()
+        });
       })
     },
     computed: {
       subjects() {
         return this.$store.state[this.$route.params.kind].subjects;
+      }
+    },
+    watch: {
+      screenWidth(after, before) {
+        let self = this;
+        if (self.resolve) {
+          self.resolve = false;
+          setTimeout(function() {
+            if (after <= 414 && before > 414)
+              self.$store.commit('change-view', {
+                status: true
+              });
+            else if (after > 414 && before <= 414)
+              self.$store.commit('change-view', {
+                status: false
+              });
+            self.resolve = true;
+          }, 50);
+        }
       }
     },
     methods: {
