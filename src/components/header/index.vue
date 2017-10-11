@@ -29,9 +29,9 @@
       </div>
       <aside class="doulist" v-click-outside="close">
         <button :class="{isOpened}" @click="toggleList"><div class="icon-doulist">目录</div></button>
-        <nav data-scroll="free" v-show="isOpened">
+        <nav data-scroll="free" v-show="isOpened" ref="doulist">
           <ul>
-            <li :class="{'isActived':$route.params.nth==index,'icon-indicator':$route.params.nth==index}" v-for="(subject,index) in widget_infos" v-if="subject.title != '留言板'" :key="subject.id"><a>{{ subject.title }}</a></li>
+            <router-link tag="li" :to="`/${$route.params.kind}/annual2016/${index}`" :class="{'isActived':$route.params.nth==index,'icon-indicator':$route.params.nth==index}" v-for="(subject,index) in widget_infos" v-if="subject.title != '留言板'" :key="subject.id"><a>{{ subject.title }}</a></router-link>
           </ul>
         </nav>
       </aside>
@@ -43,10 +43,28 @@
   export default {
     name: 'header',
     data() {
+      let self = this;
       return {
         isPlaying: true,
         isShowed: true,
-        isOpened: false
+        isOpened: false,
+        calculate(nth) {
+          setTimeout(function() {
+            nth = parseInt(nth);
+            let doulist = self.$refs.doulist;
+            if (doulist.querySelectorAll('li')[nth].offsetTop > doulist.offsetHeight + doulist.scrollTop) {
+              doulist.scrollTop += doulist.offsetHeight;
+              if (doulist.querySelectorAll('li')[nth].offsetTop > doulist.offsetHeight + doulist.scrollTop) {
+                self.calculate(nth);
+              }
+            } else if (doulist.querySelectorAll('li')[nth].offsetTop < doulist.scrollTop) {
+              doulist.scrollTop -= doulist.offsetHeight;
+              if (doulist.querySelectorAll('li')[nth].offsetTop < doulist.scrollTop) {
+                self.calculate(nth);
+              }
+            }
+          }, 1)
+        }
       }
     },
     computed: {
@@ -79,6 +97,18 @@
         let self = this;
         let audio = self.$refs.audio;
         return self.isPlaying ? audio.play() : audio.pause();
+      },
+      isOpened() {
+        let self = this;
+        if (self.isOpened) {
+          self.calculate(self.$route.params.nth);
+        }
+      },
+      '$route' (to, from) {
+        let self = this;
+        if (self.isOpened) {
+          self.calculate(to.params.nth);
+        }
       }
     },
     methods: {

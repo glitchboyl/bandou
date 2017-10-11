@@ -43,6 +43,9 @@
     height: 100%;
     overflow: hidden;
   }
+  body {
+    background-color: #000000;
+  }
   .app-container {
     overflow: hidden;
     position: relative;
