@@ -1,6 +1,6 @@
 ﻿<template>
   <section class="section">
-    <div class="section-container">
+    <div class="start-page">
       <div class="content-container">
         <div class="content">
           <div class="video-background">
@@ -121,7 +121,7 @@
     margin-left: 15px;
     z-index: 1;
   }
-  .section-container {
+  .start-page {
     position: relative;
     height: 100%;
     overflow: hidden;
