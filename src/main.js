@@ -12,10 +12,6 @@ router.beforeEach((to, from, next) => {
     params
   } = to;
   const limit = ['movie', 'game', 'drama', 'music', 'book'];
-  if (params.kind == 'error') {
-    next();
-    return true;
-  }
   if (
     limit.find(function (kind) {
       return kind == params.kind;
@@ -96,10 +92,12 @@ router.beforeEach((to, from, next) => {
         fn();
       }
     }
-  } else next({
-    path: `/error`,
-    query: null
-  });
+  } else {
+    store.commit('error', {
+      status: true
+    });
+    next();
+  }
   return true;
 });
 

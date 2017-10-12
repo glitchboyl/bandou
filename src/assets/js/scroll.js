@@ -55,13 +55,13 @@ export default function (e) {
               setTimeout(function () {
                 self.$router.push(`/${kind}/annual2016/${parseInt(Math.abs(newY / -100))}`);
                 resolve();
-              }, 300);
+              }, 250);
             }).then(() => {
               setTimeout(function () {
                 self.$store.commit('change-status', {
                   status: true
                 });
-              }, 50);
+              }, 150);
             })
           }
         })

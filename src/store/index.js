@@ -44,7 +44,8 @@ const state = {
   },
   Y: 0,
   resolve: true,
-  isPhone: document.body.clientWidth <= 414 ? true : false
+  isPhone: document.body.clientWidth <= 414 ? true : false,
+  Error: false
 }
 
 export default new Vuex.Store({

@@ -12,6 +12,7 @@
   setY,
   changeStatus,
   changeView,
+  error
 } from './mutations-types';
 
 export default {
@@ -117,5 +118,11 @@ export default {
     status
   }) {
     state.isPhone = status;
+  },
+  // Error
+  [error](state, {
+    status
+  }) {
+    state.Error = status;
   },
 }

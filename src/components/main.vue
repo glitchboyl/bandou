@@ -14,6 +14,7 @@
   import the_fallen from '@/components/theFallen';
   import person from '@/components/person';
   import end_page from '@/components/navigation';
+  import error from '@/components/error';
   import unknown from '@/components/unknown';
   export default {
     name: 'main',
@@ -78,6 +79,7 @@
       the_fallen,
       person,
       end_page,
+      error,
       unknown
     }
   }

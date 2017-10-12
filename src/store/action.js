@@ -42,18 +42,8 @@ export default {
     return new Promise(function (resolve, reject) {
       (async() => {
         let res = await Axios.get(`/movie_annual2016/widget?nth=${nth}`);
-        let {
-          id,
-          kind_str,
-          payload,
-          subject,
-          subjects,
-          people,
-          user
-        } = res.data.res;
-        commit('set-movie-widget-infos', {
-          nth,
-          subject: {
+        if (typeof res.data.res != 'undefined') {
+          let {
             id,
             kind_str,
             payload,
@@ -61,8 +51,28 @@ export default {
             subjects,
             people,
             user
-          }
-        });
+          } = res.data.res;
+          commit('set-movie-widget-infos', {
+            nth,
+            subject: {
+              id,
+              kind_str,
+              payload,
+              subject,
+              subjects,
+              people,
+              user
+            }
+          });
+        } else {
+          commit('set-movie-widget-infos', {
+            nth,
+            subject: {
+              id: `error${nth}`,
+              kind_str: 'error'
+            }
+          });
+        }
         resolve();
       })()
     })
@@ -96,18 +106,8 @@ export default {
     return new Promise(function (resolve, reject) {
       (async() => {
         let res = await Axios.get(`/game_annual2016/widget?nth=${nth}`);
-        let {
-          id,
-          kind_str,
-          payload,
-          subject,
-          subjects,
-          people,
-          user
-        } = res.data.res;
-        commit('set-game-widget-infos', {
-          nth,
-          subject: {
+        if (typeof res.data.res != 'undefined') {
+          let {
             id,
             kind_str,
             payload,
@@ -115,8 +115,28 @@ export default {
             subjects,
             people,
             user
-          }
-        });
+          } = res.data.res;
+          commit('set-game-widget-infos', {
+            nth,
+            subject: {
+              id,
+              kind_str,
+              payload,
+              subject,
+              subjects,
+              people,
+              user
+            }
+          });
+        } else {
+          commit('set-game-widget-infos', {
+            nth,
+            subject: {
+              id: `error${nth}`,
+              kind_str: 'error'
+            }
+          });
+        }
         resolve();
       })()
     })
@@ -150,18 +170,8 @@ export default {
     return new Promise(function (resolve, reject) {
       (async() => {
         let res = await Axios.get(`/book_annual2016/widget?nth=${nth}`);
-        let {
-          id,
-          kind_str,
-          payload,
-          subject,
-          subjects,
-          people,
-          user
-        } = res.data.res;
-        commit('set-book-widget-infos', {
-          nth,
-          subject: {
+        if (typeof res.data.res != 'undefined') {
+          let {
             id,
             kind_str,
             payload,
@@ -169,8 +179,28 @@ export default {
             subjects,
             people,
             user
-          }
-        });
+          } = res.data.res;
+          commit('set-book-widget-infos', {
+            nth,
+            subject: {
+              id,
+              kind_str,
+              payload,
+              subject,
+              subjects,
+              people,
+              user
+            }
+          });
+        } else {
+          commit('set-book-widget-infos', {
+            nth,
+            subject: {
+              id: `error${nth}`,
+              kind_str: 'error'
+            }
+          });
+        }
         resolve();
       })()
     })
@@ -204,18 +234,8 @@ export default {
     return new Promise(function (resolve, reject) {
       (async() => {
         let res = await Axios.get(`/drama_annual2016/widget?nth=${nth}`);
-        let {
-          id,
-          kind_str,
-          payload,
-          subject,
-          subjects,
-          people,
-          user
-        } = res.data.res;
-        commit('set-drama-widget-infos', {
-          nth,
-          subject: {
+        if (typeof res.data.res != 'undefined') {
+          let {
             id,
             kind_str,
             payload,
@@ -223,8 +243,28 @@ export default {
             subjects,
             people,
             user
-          }
-        });
+          } = res.data.res;
+          commit('set-drama-widget-infos', {
+            nth,
+            subject: {
+              id,
+              kind_str,
+              payload,
+              subject,
+              subjects,
+              people,
+              user
+            }
+          });
+        } else {
+          commit('set-drama-widget-infos', {
+            nth,
+            subject: {
+              id: `error${nth}`,
+              kind_str: 'error'
+            }
+          });
+        }
         resolve();
       })()
     })
@@ -258,18 +298,8 @@ export default {
     return new Promise(function (resolve, reject) {
       (async() => {
         let res = await Axios.get(`/music_annual2016/widget?nth=${nth}`);
-        let {
-          id,
-          kind_str,
-          payload,
-          subject,
-          subjects,
-          people,
-          user
-        } = res.data.res;
-        commit('set-music-widget-infos', {
-          nth,
-          subject: {
+        if (typeof res.data.res != 'undefined') {
+          let {
             id,
             kind_str,
             payload,
@@ -277,8 +307,28 @@ export default {
             subjects,
             people,
             user
-          }
-        });
+          } = res.data.res;
+          commit('set-music-widget-infos', {
+            nth,
+            subject: {
+              id,
+              kind_str,
+              payload,
+              subject,
+              subjects,
+              people,
+              user
+            }
+          });
+        } else {
+          commit('set-music-widget-infos', {
+            nth,
+            subject: {
+              id: `error${nth}`,
+              kind_str: 'error'
+            }
+          });
+        }
         resolve();
       })()
     })
