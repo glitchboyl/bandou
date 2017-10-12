@@ -13,7 +13,6 @@ var request = require('request')
 var rp = require('request-promise')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
-var jsonp = require('jsonp')
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
@@ -88,6 +87,7 @@ devMiddleware.waitUntilValid(() => {
   _resolve()
 })
 
+// Movie
 interface.get('/movie_annual2016', function (req, res) {
   request(`https://movie.douban.com/ithil_j/activity/movie_annual2016`, function (err, response, body) {
     res.end(body);
@@ -96,6 +96,74 @@ interface.get('/movie_annual2016', function (req, res) {
 interface.get('/movie_annual2016/widget', function (req, res) {
   var nth = req.query.nth || 0;
   request(`https://movie.douban.com/ithil_j/activity/movie_annual2016/widget/${nth}`, function (err, response, body) {
+    res.end(body);
+  })
+})
+// Game
+interface.get('/game_annual2016', function (req, res) {
+  request({
+    url: `https://www.douban.com/ithil_j/activity/game_annual2016`,
+    headers: {
+      'User-Agent': 'request'
+    }
+  }, function (err, response, body) {
+    res.end(body);
+  })
+})
+interface.get('/game_annual2016/widget', function (req, res) {
+  var nth = req.query.nth || 0;
+  request({
+    url: `https://www.douban.com/ithil_j/activity/game_annual2016/widget/${nth}`,
+    headers: {
+      'User-Agent': 'request'
+    }
+  }, function (err, response, body) {
+    res.end(body);
+  })
+})
+// Book
+interface.get('/book_annual2016', function (req, res) {
+  request(`https://book.douban.com/ithil_j/activity/book_annual2016`, function (err, response, body) {
+    res.end(body);
+  })
+})
+interface.get('/book_annual2016/widget', function (req, res) {
+  var nth = req.query.nth || 0;
+  request(`https://book.douban.com/ithil_j/activity/book_annual2016/widget/${nth}`, function (err, response, body) {
+    res.end(body);
+  })
+})
+// Drama
+interface.get('/drama_annual2016', function (req, res) {
+  request({
+    url: `https://www.douban.com/ithil_j/activity/drama_annual2016`,
+    headers: {
+      'User-Agent': 'request'
+    }
+  }, function (err, response, body) {
+    res.end(body);
+  })
+})
+interface.get('/drama_annual2016/widget', function (req, res) {
+  var nth = req.query.nth || 0;
+  request({
+    url: `https://www.douban.com/ithil_j/activity/drama_annual2016/widget/${nth}`,
+    headers: {
+      'User-Agent': 'request'
+    }
+  }, function (err, response, body) {
+    res.end(body);
+  })
+})
+// Music
+interface.get('/music_annual2016', function (req, res) {
+  request(`https://music.douban.com/ithil_j/activity/music_annual2016`, function (err, response, body) {
+    res.end(body);
+  })
+})
+interface.get('/music_annual2016/widget', function (req, res) {
+  var nth = req.query.nth || 0;
+  request(`https://music.douban.com/ithil_j/activity/music_annual2016/widget/${nth}`, function (err, response, body) {
     res.end(body);
   })
 })

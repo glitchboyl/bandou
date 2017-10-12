@@ -25,7 +25,7 @@
       <div class="background-music" v-if="background_musics" @mouseover="showName(false)" @mouseout="showName(true)" @click="toggleMusic">
         <img class="icon-music" :src="icon_music" v-show="!isPhone">
         <span class="music-title" v-show="!isPhone">{{ isPlaying ? (isShowed ? background_musics.name : '关闭背景音乐') : '播放背景音乐'}}</span>
-        <audio :src="background_musics.url" :autoplay="!isPhone" :loop="!isPhone"  style="display: none;" ref="audio"></audio>
+        <audio :src="background_musics.url" :autoplay="!isPhone" :loop="!isPhone" style="display: none;" ref="audio"></audio>
       </div>
       <aside class="doulist" v-click-outside="close">
         <button :class="{isOpened}" @click="toggleList"><div class="icon-doulist">目录</div></button>
@@ -67,7 +67,7 @@
         }
       }
     },
-    mounted(){
+    mounted() {
       this.isPlaying = !this.isPhone;
     },
     computed: {
@@ -94,23 +94,24 @@
       widget_infos() {
         return this.$store.state[this.$route.params.kind].widget_infos;
       },
-      isPhone(){
+      isPhone() {
         return this.$store.state.isPhone;
       }
     },
     watch: {
-      isPhone(){
-        this.isPlaying = !this.isPhone;
+      isPhone(a) {
+        if (this.isPlaying) {
+          let audio = this.$refs.audio;
+          return a ? audio.pause() : audio.play();
+        }
       },
-      isPlaying() {
-        console.log('ass')
-        let self = this;
-        let audio = self.$refs.audio;
-        return self.isPlaying ? audio.play() : audio.pause();
+      isPlaying(s) {
+        let audio = this.$refs.audio;
+        return s ? audio.play() : audio.pause();
       },
-      isOpened() {
+      isOpened(s) {
         let self = this;
-        if (self.isOpened) {
+        if (s) {
           self.calculate(self.$route.params.nth);
         }
       },

@@ -15,6 +15,7 @@
 } from './mutations-types';
 
 export default {
+  // Movie
   [setMovieAnnual2016](state, {
     pv,
     payload,
@@ -31,6 +32,7 @@ export default {
     state.movie.subjects[nth] = subject;
     state.movie.subjects_length = state.movie.subjects.length;
   },
+  // Game
   [setGameAnnual2016](state, {
     pv,
     payload,
@@ -45,7 +47,9 @@ export default {
     subject
   }) {
     state.game.subjects[nth] = subject;
+    state.game.subjects_length = state.game.subjects.length;
   },
+  // Book
   [setBookAnnual2016](state, {
     pv,
     payload,
@@ -60,7 +64,9 @@ export default {
     subject
   }) {
     state.book.subjects[nth] = subject;
+    state.book.subjects_length = state.book.subjects.length;
   },
+  // Drama
   [setDramaAnnual2016](state, {
     pv,
     payload,
@@ -75,7 +81,9 @@ export default {
     subject
   }) {
     state.drama.subjects[nth] = subject;
+    state.drama.subjects_length = state.drama.subjects.length;
   },
+  // Music
   [setMusicAnnual2016](state, {
     pv,
     payload,
@@ -90,17 +98,21 @@ export default {
     subject
   }) {
     state.music.subjects[nth] = subject;
+    state.music.subjects_length = state.music.subjects.length;
   },
+  // Y
   [setY](state, {
     y
   }) {
     state.Y = y;
   },
+  // Scroll status
   [changeStatus](state, {
     status
   }) {
     state.resolve = status;
   },
+  // View
   [changeView](state, {
     status
   }) {

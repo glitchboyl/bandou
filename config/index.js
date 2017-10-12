@@ -31,6 +31,10 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/movie_annual2016': `${url}:${port+1}/`,
+      '/game_annual2016': `${url}:${port+1}/`,
+      '/book_annual2016': `${url}:${port+1}/`,
+      '/drama_annual2016': `${url}:${port+1}/`,
+      '/music_annual2016': `${url}:${port+1}/`,
       '/resources': `${url}:${port+1}/`
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
