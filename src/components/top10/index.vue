@@ -3,7 +3,8 @@
     <div class="top10-container" :style="{backgroundImage: `url('${backgroundImg}')`}">
       <div class="top10-content">
         <div class="top10">
-          <banner :payload="payload" :subject="subjects[0]" :user="user"></banner>
+          <intro-banner v-if="['movie','game'].find(function (kind) {return $route.params.kind == kind})" :payload="payload" :subject="subjects[0]" :user="user"></intro-banner>
+          <exhibit-banner v-if="['book','drama','music'].find(function (kind) {return $route.params.kind == kind})" :payload="payload" :subject="subject" :user="user"></exhibit-banner>
           <subjects :subjects="subjects"></subjects>
         </div>
       </div>
@@ -12,12 +13,13 @@
 </template>
 
 <script>
-  import banner from './banner'
+  import introBanner from './intro-banner'
+  import exhibitBanner from './exhibit-banner'
   import subjects from './subjects'
   export default {
-    props: ['payload', 'subjects', 'user'],
+    props: ['payload', 'subject', 'subjects', 'user'],
     computed: {
-      isPhone(){
+      isPhone() {
         return this.$store.state.isPhone;
       },
       backgroundImg() {
@@ -25,7 +27,8 @@
       }
     },
     components: {
-      banner,
+      introBanner,
+      exhibitBanner,
       subjects
     }
   }

@@ -13,6 +13,8 @@
   import dialogue from '@/components/dialogue';
   import the_fallen from '@/components/theFallen';
   import person from '@/components/person';
+  import excerpt from '@/components/excerpt';
+  import lyric from '@/components/lyric';
   import end_page from '@/components/navigation';
   import error from '@/components/error';
   import unknown from '@/components/unknown';
@@ -78,6 +80,8 @@
       dialogue,
       the_fallen,
       person,
+      excerpt,
+      lyric,
       end_page,
       error,
       unknown

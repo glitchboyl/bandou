@@ -2,7 +2,7 @@
   <header class="fixed-header">
     <div class="left-part">
       <a :href="payload.url">
-        <img :src="payload.icon">
+        <img :src="icon">
         <span>豆瓣</span>
       </a>
       <span class="subtitle">{{ payload.sub_title }}</span>
@@ -77,6 +77,9 @@
       payload() {
         return this.$store.state[this.$route.params.kind].payload;
       },
+      icon(){
+        return `/resources?type=image&request=${this.payload.icon}`;
+      },
       share_data() {
         return JSON.parse(this.payload.share_data);
       },
@@ -84,7 +87,8 @@
         return `/resources?type=image&request=${this.payload.qr_img}`;
       },
       background_musics() {
-        return JSON.parse(this.payload.background_musics)[0] || null;
+        
+        return typeof this.payload.background_musics == 'undefined' ? null : JSON.parse(this.payload.background_musics)[0];
       },
       icon_music() {
         return this.isPlaying ? (this.isShowed ? 'data:image/gif;base64,R0lGODlhHAAcAPABAP///wAAACH5BAkeAAEAIf8LTkVUU0NBUEUyLjADAQAAACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJPjI+py+0BIngUyvrkxE3zfn2LJypkiZyooaah0x6x+SazXbsRdd/6RttlcjJiEIgTwowWZVKD/DGgzB41WnT+rNosdFq9grss8ShMXqkZBQAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJGjI+py+0PDZggPlptw3rTznCgIo5IaUrYZ67s6E5pnMHxfLe57eL9gjrtEsEDLfQiDoUy4NKYZK6QTdJTVVX+rFlp6qspAAAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJQjI+py+1vgAQQTlrdzXrytn1LKCZkeZxooKbe00ZvJzGxOeM1nCO333PtaBjFT1jUXZLAofIGXTqbTGR0ag3KsNulTcuSVrtfaXkc5q7WjAIAOw==' :

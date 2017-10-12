@@ -14,7 +14,7 @@ router.beforeEach((to, from, next) => {
   const limit = ['movie', 'game', 'drama', 'music', 'book'];
   if (
     limit.find(function (kind) {
-      return kind == params.kind;
+      return params.kind == kind;
     })
   ) {
     if (!parseInt(params.nth) && parseInt(params.nth) !== 0)
