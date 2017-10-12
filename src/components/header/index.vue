@@ -87,7 +87,6 @@
         return `/resources?type=image&request=${this.payload.qr_img}`;
       },
       background_musics() {
-        
         return typeof this.payload.background_musics == 'undefined' ? null : JSON.parse(this.payload.background_musics)[0];
       },
       icon_music() {

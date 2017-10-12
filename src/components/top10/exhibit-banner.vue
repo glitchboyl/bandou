@@ -279,10 +279,6 @@
   .appraise>span {
     margin-right: 1rem
   }
-  ._2EkFn0RsWLpdQ8azg5vQ6N:last-child,
-  ._2EkFn0RsWLpdQ8azg5vQ6N>span {
-    margin-left: 0
-  }
   .payload {
     max-width: 23em
   }
