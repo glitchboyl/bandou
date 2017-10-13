@@ -4,7 +4,7 @@
       <div class="fallen-holder">
         <div class="fallen-content">
           <banner :payload="payload"></banner>
-          <people :people="people"></people>
+          <people :payload="payload" :people="people"></people>
         </div>
       </div>
     </div>

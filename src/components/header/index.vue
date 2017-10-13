@@ -122,6 +122,7 @@
         let self = this;
         if (self.isOpened) {
           self.calculate(to.params.nth);
+          self.isOpened = false;
         } 
         if(to.params.kind != from.params.kind){
           self.isPlaying = !self.isPhone;

@@ -13,7 +13,7 @@ router.beforeEach((to, from, next) => {
   } = to;
   const limit = ['movie', 'game', 'drama', 'music', 'book'];
   if (
-    limit.find(function (kind) {
+    limit.find((kind) => {
       return params.kind == kind;
     })
   ) {

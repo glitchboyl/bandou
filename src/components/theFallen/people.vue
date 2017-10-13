@@ -1,9 +1,9 @@
 ﻿<template>
   <div class="people-container" data-scroll="limited">
     <ul class="people-list">
-      <li v-for="person in people" :key="person.id">
+      <li v-for="person in fallenList" :key="person.id">
         <a :href="person.url" target="_blank">
-          <div class="avatar" :style="{backgroundImage: `url('${person.avatar}')`}"></div>
+          <div class="avatar" :style="{backgroundImage: `url('${typeof person.avatar == 'undefined' ? person.image : person.avatar}')`}"></div>
         </a>
         <div class="name">
           <span>{{ person.name }}</span>
@@ -19,7 +19,13 @@
 
 <script>
   export default {
-    props: ['people']
+    props: ['payload', 'people'],
+    data() {
+      let self = this;
+      return {
+        fallenList: self.people.length > 0 ? self.people : JSON.parse(self.payload.data)
+      }
+    }
   }
 </script>
 
