@@ -1,7 +1,7 @@
 ﻿<template>
   <div class="main-container" @wheel.prevent.capture="scroll($event)">
     <component v-for="section in subjects" v-if="section" :payload="section.payload" :subject="section.subject" :subjects="section.subjects" :user="section.user" :people="section.people" :is="section.kind_str" :key="section.id"></component>
-    <unknown v-else></unknown>
+    <section class="section" v-else></section>
   </div>
 </template>
 
@@ -14,10 +14,10 @@
   import the_fallen from '@/components/theFallen';
   import person from '@/components/person';
   import excerpt from '@/components/excerpt';
+  import events from '@/components/events';
   import lyric from '@/components/lyric';
   import end_page from '@/components/navigation';
   import error from '@/components/error';
-  import unknown from '@/components/unknown';
   export default {
     name: 'main',
     data() {
@@ -81,17 +81,13 @@
       the_fallen,
       person,
       excerpt,
+      events,
       lyric,
       end_page,
-      error,
-      unknown
+      error
     }
   }
 </script>
 
-<style scoped>
-  .main-container {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0)
-  }
+<style>
 </style>

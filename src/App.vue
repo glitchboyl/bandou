@@ -38,27 +38,5 @@
 </script>
 
 <style>
-  @import './assets/style/common.css';
-  [v-cloak] {
-    display: none;
-  }
-  #app,
-  [data-reactroot],
-  body,
-  html {
-    height: 100%;
-    overflow: hidden;
-  }
-  body {
-    background-color: #000000;
-  }
-  .app-container {
-    overflow: hidden;
-    position: relative;
-  }
-  .app-container,
-  .main-container,
-  .section {
-    height: 100%;
-  }
+  @import './assets/style/common.min.css';
 </style>
