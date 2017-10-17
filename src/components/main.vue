@@ -92,6 +92,3 @@
     }
   }
 </script>
-
-<style>
-</style>
