@@ -290,7 +290,7 @@ body {
 }
 
 @media only screen and (max-width:1024px) {
-    .fixed-header .fixed-header {
+    .fixed-header {
         padding: 0 1.5rem;
         box-sizing: border-box
     }
@@ -819,7 +819,7 @@ body {
 }
 
 @media only screen and (max-width:1024px) {
-    .top10-container .banner-container .cover {
+    .top10-container .banner-container .cover.reverse {
         margin-left: 1.5rem;
         margin-right: 0
     }
@@ -968,7 +968,7 @@ body {
 
 @media only screen and (max-width:414px) {
     .top10-container .banner-container .content-container .content {
-        padding: 1.5rem;
+        padding: 1.5rem!important;
         width: 50%
     }
 }

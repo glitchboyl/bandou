@@ -1,5 +1,5 @@
 ﻿<template>
-  <div class="main-container" @wheel.prevent.capture="scroll($event)">
+  <div class="main-container" @wheel.prevent.capture="scroll($event)" v-touchmove="scroll">
     <component v-for="section in subjects" v-if="section" :payload="section.payload" :subject="section.subject" :subjects="section.subjects" :user="section.user" :people="section.people" :is="section.kind_str" :key="section.id"></component>
     <section class="section" v-else></section>
   </div>
@@ -7,6 +7,7 @@
 
 <script>
   import scroll from '@/assets/js/scroll';
+  import touchmove from '@/assets/js/touchmove';
   import start_page from '@/components/startPage';
   import top10 from '@/components/top10';
   import top5 from '@/components/top10';
@@ -85,6 +86,9 @@
       lyric,
       end_page,
       error
+    },
+    directives:{
+      touchmove
     }
   }
 </script>

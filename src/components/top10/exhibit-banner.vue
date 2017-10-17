@@ -19,7 +19,7 @@
               <span>{{ subject.rating.toFixed(1) }}</span>
               <span>{{ subject.rating_count }} 人评价</span>
             </div>
-            <div class="description">
+            <div class="description" v-show="!isPhone">
               {{ payload.description }}<a :href="user.url" target="_blank" v-if="user">{{ user.name }}</a></div>
           </div>
         </div>
@@ -36,6 +36,9 @@
   export default {
     props: ['payload', 'subject', 'user'],
     computed: {
+      isPhone() {
+        return this.$store.state.isPhone;
+      },
       reverse() {
         return this.payload.left == 'on';
       },
@@ -58,4 +61,9 @@
       margin-bottom: .5em
     }
   }
+@media only screen and (max-width:414px) {
+    .banner-container .content-container .content {
+        width: auto!important
+    }
+}
 </style>

@@ -40,10 +40,10 @@ export default function (e) {
       new TWEEN.Tween({
           tweeningNumber: oldY
         })
-        .easing(TWEEN.Easing.Quadratic.Out)
+        .easing(TWEEN.Easing.Quartic.Out)
         .to({
           tweeningNumber: newY
-        }, 500)
+        }, 750)
         .onUpdate(that => {
           self.$store.commit('set-y', {
             y: that.tweeningNumber.toFixed(2)
