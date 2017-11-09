@@ -12,6 +12,7 @@
 </template>
 
 <script>
+  import './assets/style/common.min.css';
   import TWEEN from '@tweenjs/tween.js';
   import fixedHeader from './components/header';
   import downButton from './components/common/downButton';
@@ -36,7 +37,3 @@
     }
   }
 </script>
-
-<style>
-  @import './assets/style/common.min.css';
-</style>

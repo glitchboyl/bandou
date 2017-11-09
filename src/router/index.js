@@ -16,7 +16,6 @@ export default new Router({
       children: [{
         path: "annual2016/:nth"
       }],
-      
     }
   ]
 });
