@@ -2,7 +2,7 @@
 var express = require('express')
 var request = require('request')
 var rp = require('request-promise')
-var port = process.env.PORT || config.dev.port
+var port = 5000 || process.env.PORT
 
 var app = express()
 
