@@ -9,8 +9,6 @@ var opn = require('opn')
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
-var request = require('request')
-var rp = require('request-promise')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
 
@@ -23,7 +21,6 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
-var interface = express()
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
@@ -87,111 +84,11 @@ devMiddleware.waitUntilValid(() => {
   _resolve()
 })
 
-// Movie
-interface.get('/movie_annual2016', function (req, res) {
-  request(`https://movie.douban.com/ithil_j/activity/movie_annual2016`, function (err, response, body) {
-    res.end(body);
-  })
-})
-interface.get('/movie_annual2016/widget', function (req, res) {
-  var nth = req.query.nth || 0;
-  request(`https://movie.douban.com/ithil_j/activity/movie_annual2016/widget/${nth}`, function (err, response, body) {
-    res.end(body);
-  })
-})
-// Game
-interface.get('/game_annual2016', function (req, res) {
-  request({
-    url: `https://www.douban.com/ithil_j/activity/game_annual2016`,
-    headers: {
-      'User-Agent': 'request'
-    }
-  }, function (err, response, body) {
-    res.end(body);
-  })
-})
-interface.get('/game_annual2016/widget', function (req, res) {
-  var nth = req.query.nth || 0;
-  request({
-    url: `https://www.douban.com/ithil_j/activity/game_annual2016/widget/${nth}`,
-    headers: {
-      'User-Agent': 'request'
-    }
-  }, function (err, response, body) {
-    res.end(body);
-  })
-})
-// Book
-interface.get('/book_annual2016', function (req, res) {
-  request(`https://book.douban.com/ithil_j/activity/book_annual2016`, function (err, response, body) {
-    res.end(body);
-  })
-})
-interface.get('/book_annual2016/widget', function (req, res) {
-  var nth = req.query.nth || 0;
-  request(`https://book.douban.com/ithil_j/activity/book_annual2016/widget/${nth}`, function (err, response, body) {
-    res.end(body);
-  })
-})
-// Drama
-interface.get('/drama_annual2016', function (req, res) {
-  request({
-    url: `https://www.douban.com/ithil_j/activity/drama_annual2016`,
-    headers: {
-      'User-Agent': 'request'
-    }
-  }, function (err, response, body) {
-    res.end(body);
-  })
-})
-interface.get('/drama_annual2016/widget', function (req, res) {
-  var nth = req.query.nth || 0;
-  request({
-    url: `https://www.douban.com/ithil_j/activity/drama_annual2016/widget/${nth}`,
-    headers: {
-      'User-Agent': 'request'
-    }
-  }, function (err, response, body) {
-    res.end(body);
-  })
-})
-// Music
-interface.get('/music_annual2016', function (req, res) {
-  request(`https://music.douban.com/ithil_j/activity/music_annual2016`, function (err, response, body) {
-    res.end(body);
-  })
-})
-interface.get('/music_annual2016/widget', function (req, res) {
-  var nth = req.query.nth || 0;
-  request(`https://music.douban.com/ithil_j/activity/music_annual2016/widget/${nth}`, function (err, response, body) {
-    res.end(body);
-  })
-})
-interface.get('/resources', function (req, res) {
-  var resources = req.query.request || null;
-  var resType = req.query.type || null;
-  if (resources.substr(0, 4) != 'http') resources = `http:${resources}`
-  var options = {
-    url: resources,
-    encoding: null
-  };
-  if (resType == 'video') {
-    res.setHeader('Content-Type', 'video/mp4');
-  } else if (resType == 'image') {
-    res.setHeader('Content-Type', 'image/jpeg');
-  }
-  rp(options).then(function (repos) {
-    res.send(repos);
-  });
-})
-
 var server = app.listen(port)
-var IFserver = interface.listen(parseInt(port) + 1)
 
 module.exports = {
   ready: readyPromise,
   close: () => {
     server.close()
-    IFserver.close()
   }
 }
