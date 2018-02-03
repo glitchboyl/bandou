@@ -78,13 +78,13 @@
         return this.$store.state[this.$route.params.kind].payload;
       },
       icon(){
-        return `/resources?type=image&request=${this.payload.icon}`;
+        return `https://images.weserv.nl/?url=${this.payload.icon.replace(/^http(s)?:\/\//,'')}`;
       },
       share_data() {
         return JSON.parse(this.payload.share_data);
       },
       qrImg() {
-        return `/resources?type=image&request=${this.payload.qr_img}`;
+        return `https://images.weserv.nl/?url=${this.payload.qr_img.replace(/^http(s)?:\/\//,'')}`;
       },
       background_musics() {
         return typeof this.payload.background_musics == 'undefined' ? null : JSON.parse(this.payload.background_musics)[0];

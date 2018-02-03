@@ -43,7 +43,7 @@
         return this.payload.left == 'on';
       },
       coverImg() {
-        return `/resources?type=image&request=${this.subject.cover}`;
+        return `https://images.weserv.nl/?url=${this.subject.cover.replace(/^http(s)?:\/\//,'')}`;
       }
     }
   }

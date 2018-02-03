@@ -24,10 +24,12 @@
         return this.$store.state.isPhone;
       },
       video() {
-        return `/resources?type=video&request=${this.isPhone ? this.payload.mobile_background_img : this.payload.video}`;
+        const video = this.isPhone ? this.payload.mobile_background_img : this.payload.video;
+        return `/get_video?request=${video.replace(/^http(s)?:\/\//,'')}`;
       },
       titleImg() {
-        return `/resources?type=image&request=${this.isPhone ? this.payload.mobile_title_img : this.payload.title_img}`;
+        const titleImg = this.isPhone ? this.payload.mobile_title_img : this.payload.title_img;
+        return `https://images.weserv.nl/?url=${titleImg.replace(/^http(s)?:\/\//,'')}`;
       }
     }
   }

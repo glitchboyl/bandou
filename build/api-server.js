@@ -1,6 +1,6 @@
 ﻿var express = require('express')
 var request = require('request')
-var rp = require('request-promise')
+// var rp = require('request-promise')
 var port = (process.env.PORT || 5000);
 
 var app = express()
@@ -96,19 +96,13 @@ app.get('/music_annual2016/widget', function (req, res) {
         res.end(body);
     })
 })
-app.get('/resources', function (req, res) {
-    var resources = (req.query.request || null);
-    var resType = (req.query.type || null);
-    if (resources.substr(0, 4) != 'http') resources = `http:${resources}`
+app.get('/get_video', function (req, res) {
+    var resources = (`https://${req.query.request}` || null);
     var options = {
         url: resources,
         encoding: null
     };
-    if (resType == 'video') {
-        res.setHeader('Content-Type', 'video/mp4');
-    } else if (resType == 'image') {
-        res.setHeader('Content-Type', 'image/jpeg');
-    }
+    res.setHeader('Content-Type', 'video/mp4');
     rp(options).then(function (repos) {
         res.send(repos);
     });

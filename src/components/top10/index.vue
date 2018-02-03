@@ -23,7 +23,8 @@
         return this.$store.state.isPhone;
       },
       backgroundImg() {
-        return `/resources?type=image&request=${this.isPhone ? this.payload.mobile_background_img : this.payload.background_img}`;
+        const backgroundImg = this.isPhone ? this.payload.mobile_background_img : this.payload.background_img;
+        return `https://images.weserv.nl/?url=${backgroundImg.replace(/^http(s)?:\/\//,'')}`;
       }
     },
     components: {
