@@ -1,8 +1,7 @@
-﻿var config = require('../config')
-var express = require('express')
+﻿var express = require('express')
 var request = require('request')
 var rp = require('request-promise')
-var port = 5000 || process.env.PORT
+var port = process.env.PORT || 5000;
 
 var app = express()
 
@@ -103,7 +102,14 @@ app.get('/resources', function (req, res) {
         res.send(repos);
     });
 })
-
-app.listen(parseInt(port) + 1, () => {
-    console.log('> API-Server is listening');
+var _resolve
+var readyPromise = new Promise(resolve => {
+    _resolve = resolve
 })
+var server = app.listen(port)
+module.exports = {
+    ready: readyPromise,
+    close: () => {
+        server.close()
+    }
+}
