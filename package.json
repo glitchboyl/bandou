@@ -6,12 +6,13 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "start": "node build/dev-server.js",
+    "start": "node build/api-server.js",
     "build": "node build/build.js"
   },
   "dependencies": {
     "@tweenjs/tween.js": "^17.1.1",
     "axios": "^0.16.2",
+    "express": "^4.14.1",
     "jsonp": "^0.2.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.2",
@@ -34,7 +35,6 @@
     "css-loader": "^0.28.0",
     "cssnano": "^3.10.0",
     "eventsource-polyfill": "^0.9.6",
-    "express": "^4.14.1",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.11.1",
     "friendly-errors-webpack-plugin": "^1.1.3",
