@@ -12,6 +12,10 @@ import {
   getMusicWidgetInfos,
 } from './mutations-types';
 
+const Fetch = Axios.create({
+  baseURL: 'https://nameless-eyrie-18321.herokuapp.com/'
+});
+
 export default {
   // Movie
   [getMovieAnnual2016]({
@@ -19,7 +23,7 @@ export default {
   }) {
     return new Promise(function (resolve, reject) {
       (async() => {
-        let res = await Axios.get('/movie_annual2016');
+        let res = await Fetch.get('/movie_annual2016');
         let {
           pv,
           payload,
@@ -41,7 +45,7 @@ export default {
   }) {
     return new Promise(function (resolve, reject) {
       (async() => {
-        let res = await Axios.get(`/movie_annual2016/widget?nth=${nth}`);
+        let res = await Fetch.get(`/movie_annual2016/widget?nth=${nth}`);
         if (typeof res.data.res != 'undefined') {
           let {
             id,
@@ -83,7 +87,7 @@ export default {
   }) {
     return new Promise(function (resolve, reject) {
       (async() => {
-        let res = await Axios.get('/game_annual2016');
+        let res = await Fetch.get('/game_annual2016');
         let {
           pv,
           payload,
@@ -105,7 +109,7 @@ export default {
   }) {
     return new Promise(function (resolve, reject) {
       (async() => {
-        let res = await Axios.get(`/game_annual2016/widget?nth=${nth}`);
+        let res = await Fetch.get(`/game_annual2016/widget?nth=${nth}`);
         if (typeof res.data.res != 'undefined') {
           let {
             id,
@@ -147,7 +151,7 @@ export default {
   }) {
     return new Promise(function (resolve, reject) {
       (async() => {
-        let res = await Axios.get('/book_annual2016');
+        let res = await Fetch.get('/book_annual2016');
         let {
           pv,
           payload,
@@ -169,7 +173,7 @@ export default {
   }) {
     return new Promise(function (resolve, reject) {
       (async() => {
-        let res = await Axios.get(`/book_annual2016/widget?nth=${nth}`);
+        let res = await Fetch.get(`/book_annual2016/widget?nth=${nth}`);
         if (typeof res.data.res != 'undefined') {
           let {
             id,
@@ -211,7 +215,7 @@ export default {
   }) {
     return new Promise(function (resolve, reject) {
       (async() => {
-        let res = await Axios.get('/drama_annual2016');
+        let res = await Fetch.get('/drama_annual2016');
         let {
           pv,
           payload,
@@ -233,7 +237,7 @@ export default {
   }) {
     return new Promise(function (resolve, reject) {
       (async() => {
-        let res = await Axios.get(`/drama_annual2016/widget?nth=${nth}`);
+        let res = await Fetch.get(`/drama_annual2016/widget?nth=${nth}`);
         if (typeof res.data.res != 'undefined') {
           let {
             id,
@@ -275,7 +279,7 @@ export default {
   }) {
     return new Promise(function (resolve, reject) {
       (async() => {
-        let res = await Axios.get('/music_annual2016');
+        let res = await Fetch.get('/music_annual2016');
         let {
           pv,
           payload,
@@ -297,7 +301,7 @@ export default {
   }) {
     return new Promise(function (resolve, reject) {
       (async() => {
-        let res = await Axios.get(`/music_annual2016/widget?nth=${nth}`);
+        let res = await Fetch.get(`/music_annual2016/widget?nth=${nth}`);
         if (typeof res.data.res != 'undefined') {
           let {
             id,
