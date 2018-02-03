@@ -5,6 +5,9 @@ var port = process.env.PORT || 5000;
 
 var app = express()
 
+app.get('/',(req,res)=>{
+    res.end('Hello Heroku.');
+})
 // Movie
 app.get('/movie_annual2016', function (req, res) {
     request(`https://movie.douban.com/ithil_j/activity/movie_annual2016`, function (err, response, body) {
