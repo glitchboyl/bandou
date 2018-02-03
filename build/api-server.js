@@ -23,7 +23,7 @@ app.get('/movie_annual2016', function (req, res) {
     })
 })
 app.get('/movie_annual2016/widget', function (req, res) {
-    var nth = req.query.nth || 0;
+    var nth = (req.query.nth || 0);
     request(`https://movie.douban.com/ithil_j/activity/movie_annual2016/widget/${nth}`, function (err, response, body) {
         res.end(body);
     })
@@ -40,7 +40,7 @@ app.get('/game_annual2016', function (req, res) {
     })
 })
 app.get('/game_annual2016/widget', function (req, res) {
-    var nth = req.query.nth || 0;
+    var nth = (req.query.nth || 0);
     request({
         url: `https://www.douban.com/ithil_j/activity/game_annual2016/widget/${nth}`,
         headers: {
@@ -57,7 +57,7 @@ app.get('/book_annual2016', function (req, res) {
     })
 })
 app.get('/book_annual2016/widget', function (req, res) {
-    var nth = req.query.nth || 0;
+    var nth = (req.query.nth || 0);
     request(`https://book.douban.com/ithil_j/activity/book_annual2016/widget/${nth}`, function (err, response, body) {
         res.end(body);
     })
@@ -74,7 +74,7 @@ app.get('/drama_annual2016', function (req, res) {
     })
 })
 app.get('/drama_annual2016/widget', function (req, res) {
-    var nth = req.query.nth || 0;
+    var nth = (req.query.nth || 0);
     request({
         url: `https://www.douban.com/ithil_j/activity/drama_annual2016/widget/${nth}`,
         headers: {
@@ -91,14 +91,14 @@ app.get('/music_annual2016', function (req, res) {
     })
 })
 app.get('/music_annual2016/widget', function (req, res) {
-    var nth = req.query.nth || 0;
+    var nth = (req.query.nth || 0);
     request(`https://music.douban.com/ithil_j/activity/music_annual2016/widget/${nth}`, function (err, response, body) {
         res.end(body);
     })
 })
 app.get('/resources', function (req, res) {
-    var resources = req.query.request || null;
-    var resType = req.query.type || null;
+    var resources = (req.query.request || null);
+    var resType = (req.query.type || null);
     if (resources.substr(0, 4) != 'http') resources = `http:${resources}`
     var options = {
         url: resources,
