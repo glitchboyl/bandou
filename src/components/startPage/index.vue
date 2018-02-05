@@ -25,7 +25,7 @@
       },
       video() {
         const {kind} = this.$route.params;
-        return `http://p3npi7o3t.bkt.clouddn.com/opening/${kind}.${this.isPhone ? 'mp4' : 'jpg'}`;
+        return `http://p3npi7o3t.bkt.clouddn.com/opening/${kind}.${this.isPhone ? 'jpg' : 'mp4'}`;
       },
       titleImg() {
         const titleImg = this.isPhone ? this.payload.mobile_title_img : this.payload.title_img;
