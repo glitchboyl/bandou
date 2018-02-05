@@ -33,8 +33,7 @@ module.exports = {
       '/game_annual2016': `https://nameless-eyrie-18321.herokuapp.com/`,
       '/book_annual2016': `https://nameless-eyrie-18321.herokuapp.com/`,
       '/drama_annual2016': `https://nameless-eyrie-18321.herokuapp.com/`,
-      '/music_annual2016': `https://nameless-eyrie-18321.herokuapp.com/`,
-      '/get_video': `https://nameless-eyrie-18321.herokuapp.com/`
+      '/music_annual2016': `https://nameless-eyrie-18321.herokuapp.com/`
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

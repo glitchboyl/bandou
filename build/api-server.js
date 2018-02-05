@@ -1,6 +1,5 @@
 ﻿var express = require('express')
 var request = require('request')
-// var rp = require('request-promise')
 var port = (process.env.PORT || 5000);
 
 var app = express()
@@ -95,17 +94,6 @@ app.get('/music_annual2016/widget', function (req, res) {
     request(`https://music.douban.com/ithil_j/activity/music_annual2016/widget/${nth}`, function (err, response, body) {
         res.end(body);
     })
-})
-app.get('/get_video', function (req, res) {
-    var resources = (`https://${req.query.request}` || null);
-    var options = {
-        url: resources,
-        encoding: null
-    };
-    res.setHeader('Content-Type', 'video/mp4');
-    rp(options).then(function (repos) {
-        res.send(repos);
-    });
 })
 var _resolve
 var readyPromise = new Promise(resolve => {

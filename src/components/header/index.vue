@@ -31,7 +31,7 @@
         <button :class="{isOpened}" @click="toggleList"><div class="icon-doulist">目录</div></button>
         <nav data-scroll="free" v-show="isOpened" ref="doulist">
           <ul>
-            <router-link tag="li" :to="`/${$route.params.kind}/annual2016/${index}`" :class="{'isActived':$route.params.nth==index,'icon-indicator':$route.params.nth==index}" v-for="(subject,index) in widget_infos" v-if="subject.title != '留言板'" :key="subject.id"><a>{{ subject.title }}</a></router-link>
+            <router-link tag="li" :to="`/${$route.params.kind}/annual2016/${index}`" :class="{'isActived':$route.params.nth===index,'icon-indicator':$route.params.nth===index}" v-for="(subject,index) in widget_infos" v-if="subject.title != '留言板'" :key="subject.id"><a>{{ subject.title }}</a></router-link>
           </ul>
         </nav>
       </aside>
@@ -77,7 +77,7 @@
       payload() {
         return this.$store.state[this.$route.params.kind].payload;
       },
-      icon(){
+      icon() {
         return `https://images.weserv.nl/?url=${this.payload.icon.replace(/^http(s)?:\/\//,'')}`;
       },
       share_data() {
@@ -87,7 +87,7 @@
         return `https://images.weserv.nl/?url=${this.payload.qr_img.replace(/^http(s)?:\/\//,'')}`;
       },
       background_musics() {
-        return typeof this.payload.background_musics == 'undefined' ? null : JSON.parse(this.payload.background_musics)[0];
+        return typeof this.payload.background_musics === 'undefined' ? null : JSON.parse(this.payload.background_musics)[0];
       },
       icon_music() {
         return this.isPlaying ? (this.isShowed ? 'data:image/gif;base64,R0lGODlhHAAcAPABAP///wAAACH5BAkeAAEAIf8LTkVUU0NBUEUyLjADAQAAACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJPjI+py+0BIngUyvrkxE3zfn2LJypkiZyooaah0x6x+SazXbsRdd/6RttlcjJiEIgTwowWZVKD/DGgzB41WnT+rNosdFq9grss8ShMXqkZBQAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJGjI+py+0PDZggPlptw3rTznCgIo5IaUrYZ67s6E5pnMHxfLe57eL9gjrtEsEDLfQiDoUy4NKYZK6QTdJTVVX+rFlp6qspAAAh+QQJHgABACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAcABwAAAJQjI+py+1vgAQQTlrdzXrytn1LKCZkeZxooKbe00ZvJzGxOeM1nCO333PtaBjFT1jUXZLAofIGXTqbTGR0ag3KsNulTcuSVrtfaXkc5q7WjAIAOw==' :
@@ -103,28 +103,30 @@
     },
     watch: {
       isPhone(a) {
-        if (this.isPlaying) {
-          let audio = this.$refs.audio;
+        if (this.isPlaying && !!this.background_musics) {
+          const audio = this.$refs.audio;
           return a ? audio.pause() : audio.play();
         }
       },
       isPlaying(s) {
-        let audio = this.$refs.audio;
-        return s ? audio.play() : audio.pause();
+        if (!!this.background_musics) {
+          const audio = this.$refs.audio;
+          return s ? audio.play() : audio.pause();
+        }
       },
       isOpened(s) {
-        let self = this;
+        const self = this;
         if (s) {
           self.calculate(self.$route.params.nth);
         }
       },
       '$route' (to, from) {
-        let self = this;
+        const self = this;
         if (self.isOpened) {
           self.calculate(to.params.nth);
           self.isOpened = false;
-        } 
-        if(to.params.kind != from.params.kind){
+        }
+        if (to.params.kind != from.params.kind) {
           self.isPlaying = !self.isPhone;
         }
       }

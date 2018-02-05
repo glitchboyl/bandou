@@ -24,8 +24,8 @@
         return this.$store.state.isPhone;
       },
       video() {
-        const video = this.isPhone ? this.payload.mobile_background_img : this.payload.video;
-        return `/get_video?request=${video.replace(/^http(s)?:\/\//,'')}`;
+        const {kind} = this.$route.params;
+        return `http://p3npi7o3t.bkt.clouddn.com/opening/${kind}.${this.isPhone ? 'mp4' : 'jpg'}`;
       },
       titleImg() {
         const titleImg = this.isPhone ? this.payload.mobile_title_img : this.payload.title_img;
