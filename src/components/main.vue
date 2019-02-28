@@ -1,6 +1,7 @@
 ﻿<template>
-  <div class="main-container" @wheel.prevent.capture="scroll($event)" v-touchmove="scroll">
-    <component v-for="section in subjects" v-if="section" :payload="section.payload" :subject="section.subject" :subjects="section.subjects" :user="section.user" :people="section.people" :is="section.kind_str" :key="section.id"></component>
+  <div class="main-container" ref="main" v-touchmove="scroll">
+    <component v-for="section in subjects" v-if="section" :payload="section.payload" :subject="section.subject"
+      :subjects="section.subjects" :user="section.user" :people="section.people" :is="section.kind_str" :key="section.id"></component>
     <section class="section" v-else></section>
   </div>
 </template>
@@ -45,6 +46,9 @@
             self.screenWidth = document.body.clientWidth
           })()
         });
+        self.$refs.main.addEventListener('mousewheel', e => {
+          self.scroll(e, self);
+        });
       })
     },
     computed: {
@@ -57,7 +61,7 @@
         let self = this;
         if (self.resolve) {
           self.resolve = false;
-          setTimeout(function() {
+          setTimeout(function () {
             if (after <= 414 && before > 414)
               self.$store.commit('change-view', {
                 status: true
@@ -87,8 +91,9 @@
       end_page,
       error
     },
-    directives:{
+    directives: {
       touchmove
     }
   }
+
 </script>

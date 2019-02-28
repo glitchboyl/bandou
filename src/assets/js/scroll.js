@@ -1,7 +1,7 @@
 ﻿import TWEEN from '@tweenjs/tween.js';
 
-export default function (e) {
-  let self = this;
+export default function (e, vm) {
+  let self = vm || this;
   let {
     Y,
     resolve
